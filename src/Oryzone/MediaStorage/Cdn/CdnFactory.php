@@ -7,7 +7,6 @@ use Oryzone\MediaStorage\Exception\InvalidArgumentException,
 
 class CdnFactory implements CdnFactoryInterface
 {
-
     /**
      * Contains the cdn definitions
      *
@@ -44,6 +43,18 @@ class CdnFactory implements CdnFactoryInterface
     }
 
     /**
+     * Adds an instance to the mapping
+     *
+     * @param $name
+     * @param CdnInterface $instance
+     * @return void
+     */
+    public function addInstance($name, CdnInterface $instance)
+    {
+        $this->map[$name] = $instance;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function get($cdnName)
@@ -52,35 +63,42 @@ class CdnFactory implements CdnFactoryInterface
             throw new InvalidArgumentException(sprintf('The cdn "%s" has not been defined', $cdnName));
 
         $definition = $this->map[$cdnName];
-        if(!is_array($definition) || !isset($definition['initializer']) || !isset($definition['config']))
-            throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: it must be an array containing "initializer" and "config" keys', $cdnName));
-
-        $config = $definition['config'];
-        if(!is_array($config))
-            throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "config" must be an array', $cdnName));
-
-        $initializer = $definition['initializer'];
+        if( (is_array($definition) && (!isset($definition['initializer']) || !isset($definition['config']))) ||
+            (is_object($definition) && !$definition instanceof CdnInterface) )
+                throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: it must be a \Oryzone\MediaStorage\Cdn\CdnInterface object or an array containing "initializer" and "config" keys', $cdnName));
 
         $cdn = NULL;
-        if(is_string($initializer))
+        if(is_object($definition))
+            $cdn = $definition;
+        else
         {
-            if(!class_exists($initializer))
-                throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "initializer" is set to the string "%s" that is not an existent class', $cdnName, $initializer));
+            $config = $definition['config'];
+            if(!is_array($config))
+                throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "config" must be an array', $cdnName));
 
-            $cdn = new $initializer;
+            $initializer = $definition['initializer'];
+
+            if(is_string($initializer))
+            {
+                if(!class_exists($initializer))
+                    throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "initializer" is set to the string "%s" that is not an existent class', $cdnName, $initializer));
+
+                $cdn = new $initializer;
+            }
+            elseif(is_callable($initializer))
+            {
+                $initializerParameters = array();
+                if(isset($definition['parameters']))
+                    $initializerParameters = $definition['parameters'];
+
+                $cdn = call_user_func_array($initializer, $initializerParameters);
+                if(!$cdn instanceof CdnInterface)
+                    throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the initializer does not returned an instance of \Oryzone\MediaBundle\Cdn\CdnInterface', $cdnName));
+            }
+
+            $cdn->setConfiguration($config);
         }
-        elseif(is_callable($initializer))
-        {
-            $initializerParameters = array();
-            if(isset($definition['parameters']))
-                $initializerParameters = $definition['parameters'];
 
-            $cdn = call_user_func_array($initializer, $initializerParameters);
-            if(!$cdn instanceof CdnInterface)
-                throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the initializer does not returned an instance of \Oryzone\MediaBundle\Cdn\CdnInterface', $cdnName));
-        }
-
-        $cdn->setConfiguration($config);
         return $cdn;
     }
 }
