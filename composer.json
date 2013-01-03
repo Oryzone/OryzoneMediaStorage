@@ -1,0 +1,40 @@
+
+{
+    "name":         "oryzone/media-storage",
+    "type":         "library",
+    "description":  "Php 5.3 library to abstract file storage and retrieval",
+    "keywords":     ["file", "filesystem", "media", "abstraction"],
+    "minimum-stability": "dev",
+    "homepage":     "https://github.com/Oryzone/OryzoneMediaStorage",
+    "license":      "MIT",
+    "authors": [
+        {
+            "name": "Oryzone Team",
+            "homepage": "http://oryzone.com"
+        },
+        {
+            "name": "Luciano Mammino",
+            "email": "lmammino@oryzone.com",
+            "homepage": "http://oryzone.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Andrea Mangano",
+            "email": "amangano@oryzone.com",
+            "homepage": "http://oryzone.com",
+            "role": "Designer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "knplabs/gaufrette":"*"
+    },
+    "suggest": {
+        "oryzone/media-storage-bundle": "*",
+        "imagine/Imagine": "To process images in Image and Video providers",
+        "kriswallsmith/buzz": "For the API http requests used in Youtube and Vimeo providers"
+    },
+    "autoload": {
+        "psr-0": { "MediaStorage": "src/" }
+    }
+}
