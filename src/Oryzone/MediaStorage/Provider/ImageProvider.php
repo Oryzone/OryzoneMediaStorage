@@ -153,7 +153,7 @@ class ImageProvider extends FileProvider
 
         if (is_array($options) && !empty($options)) {
             if($this->imagine == NULL)
-                throw new ProviderProcessException(sprintf('Cannot process image "%s": Imagine Bundle (avalanche123/imagine-bundle) not installed or misconfigured', $media), $this, $media, $variant);
+                throw new ProviderProcessException(sprintf('Cannot process image "%s": Imagine library not installed or misconfigured', $media), $this, $media, $variant);
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
 

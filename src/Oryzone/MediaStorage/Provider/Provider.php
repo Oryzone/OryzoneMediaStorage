@@ -125,7 +125,7 @@ abstract class Provider implements ProviderInterface
     /*
      * Transforms a media (from a form)
      *
-     * @param \Oryzone\Bundle\MediaStorageBundle\Model\Media $media
+     * @param \Oryzone\MediaStorage\Model\Media $media
      * @return mixed
 
     public function transform(Media $media)

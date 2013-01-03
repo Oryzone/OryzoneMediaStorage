@@ -2,6 +2,9 @@
 
 namespace Oryzone\MediaStorage\Model;
 
+use Oryzone\MediaStorage\Variant\VariantInterface,
+    Oryzone\MediaStorage\Exception\InvalidArgumentException;
+
 interface MediaInterface
 {
     /**
@@ -68,7 +71,7 @@ interface MediaInterface
     /**
      * Set a variant with a given name
      *
-     * @param \Oryzone\Bundle\MediaStorageBundle\Variant\VariantInterface $variant
+     * @param \Oryzone\MediaStorage\Variant\VariantInterface $variant
      */
     public function addVariant(VariantInterface $variant);
 
@@ -91,8 +94,8 @@ interface MediaInterface
      * Creates a <code>Variant</code> instance for a given variant
      *
      * @param $variantName
-     * @return \Oryzone\Bundle\MediaStorageBundle\Variant\Variant|\Oryzone\Bundle\MediaStorageBundle\Variant\VariantInterface
-     * @throws \Oryzone\Bundle\MediaStorageBundle\Exception\InvalidArgumentException
+     * @return \Oryzone\MediaStorage\Variant\VariantInterface
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      */
     public function getVariantInstance($variantName);
 
