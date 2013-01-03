@@ -8,7 +8,7 @@ use Oryzone\MediaStorage\Exception\InvalidArgumentException,
 class CdnFactory implements CdnFactoryInterface
 {
     /**
-     * Contains the cdn definitions
+     * Contains the cdn definitions and instances
      *
      * @var array $map
      */
@@ -17,7 +17,7 @@ class CdnFactory implements CdnFactoryInterface
     /**
      * Constructor
      *
-     * @param array $map the available cdn definitions
+     * @param array $map the available cdn definitions and instances
      */
     public function __constructor($map = array())
     {
