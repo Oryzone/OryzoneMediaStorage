@@ -30,7 +30,9 @@ class CdnFactory implements CdnFactoryInterface
      *
      * @param string $name
      * @param string|\Callable $initializer
+     * @param array $initializerParameters
      * @param array $config
+     * @return void
      */
     public function addDefinition($name, $initializer, $initializerParameters = array(), $config = array())
     {
