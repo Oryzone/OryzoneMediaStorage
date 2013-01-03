@@ -30,6 +30,7 @@
     },
     "suggest": {
         "oryzone/media-storage-bundle": "*",
+        "doctrine/common": "For caching request in integration services",
         "imagine/Imagine": "To process images in Image and Video providers",
         "kriswallsmith/buzz": "For the API http requests used in Youtube and Vimeo providers"
     },
