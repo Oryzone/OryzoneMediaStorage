@@ -114,21 +114,6 @@ interface VariantInterface
     public function getMetaValue($key, $default = NULL);
 
     /**
-     * Get the content type (mime type) of the file associated with the variant
-     * Used if the variant is stored as a file
-     *
-     * @return string
-     */
-    public function getContentType();
-
-    /**
-     * Sets contentType
-     *
-     * @param string $contentType
-     */
-    public function setContentType($contentType);
-
-    /**
      * Get the array of options to use (or used) for processing
      *
      * @return array

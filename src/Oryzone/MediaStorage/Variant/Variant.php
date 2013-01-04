@@ -33,11 +33,6 @@ class Variant implements VariantInterface
     protected $meta;
 
     /**
-     * @var string $contentType
-     */
-    protected $contentType;
-
-    /**
      * @var array $options
      */
     protected $options;
@@ -125,24 +120,6 @@ class Variant implements VariantInterface
             return $this->meta[$key];
 
         return $default;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getContentType()
-    {
-        return $this->getContentType();
-    }
-
-    /**
-     * Set the contentType
-     *
-     * @param string $contentType
-     */
-    public function setContentType($contentType)
-    {
-        $this->contentType = $contentType;
     }
 
     /**
