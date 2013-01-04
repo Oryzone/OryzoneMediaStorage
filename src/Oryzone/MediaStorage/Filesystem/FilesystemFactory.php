@@ -9,7 +9,7 @@ use Oryzone\MediaStorage\Exception\InvalidArgumentException;
  * mostly copied from gaufrette bundle filesystem map:
  * https://github.com/KnpLabs/KnpGaufretteBundle/blob/master/FilesystemMap.php
  */
-class FilesystemFactory implements \IteratorAggregate
+class FilesystemFactory implements FilesystemFactoryInterface, \IteratorAggregate
 {
     /**
      * Map of filesystems indexed by their name
@@ -29,22 +29,20 @@ class FilesystemFactory implements \IteratorAggregate
     }
 
     /**
-     * Retrieves a filesystem by its name.
-     *
-     * @param string $name name of a filesystem
-     *
-     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException if the filesystem does not exist
-     * @return \Gaufrette\Filesystem
+     * {@inheritDoc}
      */
-    public function get($name)
+    public function get($filesystemName)
     {
-        if (!isset($this->map[$name])) {
-            throw new InvalidArgumentException(sprintf('No filesystem register for name "%s"', $name));
+        if (!isset($this->map[$filesystemName])) {
+            throw new InvalidArgumentException(sprintf('No filesystem register for name "%s"', $filesystemName));
         }
 
-        return $this->map[$name];
+        return $this->map[$filesystemName];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator()
     {
         return new \ArrayIterator($this->map);
