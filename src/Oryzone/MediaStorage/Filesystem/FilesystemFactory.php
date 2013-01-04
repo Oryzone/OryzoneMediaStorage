@@ -5,7 +5,7 @@ namespace Oryzone\MediaStorage\Filesystem;
 use Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 /**
- * Factory for gaufrette filesystems
+ * Factory for gaufrette filesystems (to decouple the library from the symfony bundle for gaufrette)
  * mostly copied from gaufrette bundle filesystem map:
  * https://github.com/KnpLabs/KnpGaufretteBundle/blob/master/FilesystemMap.php
  */
