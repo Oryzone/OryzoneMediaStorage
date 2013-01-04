@@ -27,7 +27,7 @@
     "require": {
         "php": ">=5.3.2",
         "ext-xml": "*",
-        "knplabs/gaufrette":"0.2.*@dev"
+        "knplabs/gaufrette":"master"
     },
     "suggest": {
         "oryzone/media-storage-bundle": "*",
