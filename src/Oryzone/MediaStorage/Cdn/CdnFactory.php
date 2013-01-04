@@ -81,7 +81,7 @@ class CdnFactory implements CdnFactoryInterface
             if(is_string($initializer))
             {
                 if(!class_exists($initializer))
-                    throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "initializer" is set to the string "%s" that is not an existent class', $cdnName, $initializer));
+                    throw new InvalidConfigurationException(sprintf('The cdn "%s" is not properly defined: the key "initializer" is set to the string "%s" that cannot be resolved to an existent class', $cdnName, $initializer));
 
                 $cdn = new $initializer;
             }
