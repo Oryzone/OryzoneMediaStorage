@@ -29,6 +29,11 @@
         "ext-xml": "*",
         "knplabs/gaufrette": "0.2.*@dev"
     },
+    "require-dev": {
+        "doctrine/common": "*",
+        "imagine/Imagine": "*",
+        "kriswallsmith/buzz": "*"
+    },
     "suggest": {
         "oryzone/media-storage-bundle": "*",
         "doctrine/common": "For caching request in integration services",
