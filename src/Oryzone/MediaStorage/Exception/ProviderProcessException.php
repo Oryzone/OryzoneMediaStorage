@@ -3,7 +3,7 @@
 namespace Oryzone\MediaStorage\Exception;
 
 use Oryzone\MediaStorage\Provider\ProviderInterface,
-    Oryzone\MediaStorage\Model\Media,
+    Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface;
 
 class ProviderProcessException extends MediaStorageException
@@ -14,7 +14,7 @@ class ProviderProcessException extends MediaStorageException
     protected $provider;
 
     /**
-     * @var \Oryzone\MediaStorage\Model\Media $media
+     * @var \Oryzone\MediaStorage\Model\MediaInterface $media
      */
     protected $media;
 
@@ -28,12 +28,12 @@ class ProviderProcessException extends MediaStorageException
      *
      * @param string                                           $message
      * @param \Oryzone\MediaStorage\Provider\ProviderInterface $provider
-     * @param \Oryzone\MediaStorage\Model\Media                $media
+     * @param \Oryzone\MediaStorage\Model\MediaInterface       $media
      * @param \Oryzone\MediaStorage\Variant\VariantInterface   $variant
      * @param int                                              $code
      * @param \Exception                                       $previous
      */
-    public function __construct($message = "", ProviderInterface $provider = NULL, Media $media = NULL, VariantInterface $variant = NULL, $code = 0, \Exception $previous = null)
+    public function __construct($message = "", ProviderInterface $provider = NULL, MediaInterface $media = NULL, VariantInterface $variant = NULL, $code = 0, \Exception $previous = null)
     {
         $this->provider = $provider;
         $this->media = $media;
@@ -44,7 +44,7 @@ class ProviderProcessException extends MediaStorageException
     /**
      * Get the media
      *
-     * @return \Oryzone\MediaStorage\Model\Media
+     * @return \Oryzone\MediaStorage\Model\MediaInterface
      */
     public function getMedia()
     {

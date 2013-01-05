@@ -26,7 +26,7 @@ class VariantProcessingException extends MediaStorageException
      * @param int                                            $code
      * @param \Exception                                     $previous
      */
-    public function __construct($message = "", MediaInterface $media, VariantInterface $variant, $code = 0, \Exception $previous = null)
+    public function __construct($message = "", MediaInterface $media = NULL, VariantInterface $variant = NULL, $code = 0, \Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->media = $media;

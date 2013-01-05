@@ -2,10 +2,10 @@
 
 namespace Oryzone\MediaStorage\Exception;
 
-use Oryzone\MediaStorage\Provider\ProviderInterface,
-    Oryzone\MediaStorage\Model\MediaInterface;
+use Oryzone\MediaStorage\Model\MediaInterface,
+    Oryzone\MediaStorage\Provider\ProviderInterface;
 
-class ProviderPrepareException extends MediaStorageException
+class InvalidContentException extends MediaStorageException
 {
 
     /**
@@ -21,17 +21,17 @@ class ProviderPrepareException extends MediaStorageException
     /**
      * Constructor
      *
-     * @param string                                           $message
+     * @param string $message
      * @param \Oryzone\MediaStorage\Provider\ProviderInterface $provider
-     * @param \Oryzone\MediaStorage\Model\MediaInterface       $media
-     * @param int                                              $code
-     * @param \Exception                                       $previous
+     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param int $code
+     * @param \Exception $previous
      */
     public function __construct($message = "", ProviderInterface $provider = NULL, MediaInterface $media = NULL, $code = 0, \Exception $previous = null)
     {
+        parent::__construct($message, $code, $previous);
         $this->provider = $provider;
         $this->media = $media;
-        parent::__construct($message, $code, $previous);
     }
 
     /**

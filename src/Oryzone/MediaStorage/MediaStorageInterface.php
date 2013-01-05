@@ -12,21 +12,21 @@ interface MediaStorageInterface
      *
      * @param Model\MediaInterface $media
      */
-    public function storeMedia(MediaInterface $media);
+    public function store(MediaInterface $media);
 
     /**
      * Update media
      *
      * @param Model\MediaInterface $media
      */
-    public function updateMedia(MediaInterface $media);
+    public function update(MediaInterface $media);
 
     /**
      * Removes (deletes) a media and connected files
      *
      * @param Model\MediaInterface $media
      */
-    public function removeMedia(MediaInterface $media);
+    public function remove(MediaInterface $media);
 
     /**
      * Get the url of a media file (if any)
