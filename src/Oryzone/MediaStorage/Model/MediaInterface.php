@@ -3,6 +3,7 @@
 namespace Oryzone\MediaStorage\Model;
 
 use Oryzone\MediaStorage\Variant\VariantInterface,
+    Oryzone\MediaStorage\Context\ContextInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 interface MediaInterface
@@ -27,6 +28,14 @@ interface MediaInterface
      * @return string
      */
     public function getContext();
+
+    /**
+     * Set the context
+     *
+     * @param \Oryzone\MediaStorage\Context\ContextInterface $context
+     * @return void
+     */
+    public function setContext(ContextInterface $context);
 
     /**
      * Get created at

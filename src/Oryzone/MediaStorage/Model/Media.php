@@ -3,7 +3,9 @@
 namespace Oryzone\MediaStorage\Model;
 
 use Oryzone\MediaStorage\Exception\InvalidArgumentException,
-    Oryzone\MediaStorage\Variant\Variant;
+    Oryzone\MediaStorage\Variant\Variant,
+    Oryzone\MediaStorage\Variant\VariantInterface,
+    Oryzone\MediaStorage\Context\ContextInterface;
 
 abstract class Media implements MediaInterface
 {
@@ -86,11 +88,9 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * Set context
-     *
-     * @param string $context
+     * {@inheritDoc}
      */
-    public function setContext($context)
+    public function setContext(ContextInterface $context)
     {
         $this->context = $context;
     }
