@@ -70,4 +70,36 @@ class NullEventDispatcherAdapter implements EventDispatcherAdapterInterface
     {
         // does nothing
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onBeforeModelPersist(MediaInterface $media, $update = FALSE)
+    {
+        // does nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onAfterModelPersist(MediaInterface $media, $update = FALSE)
+    {
+        // does nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onBeforeModelRemove(MediaInterface $media)
+    {
+        // does nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onAfterModelRemove(MediaInterface $media)
+    {
+        // does nothing
+    }
 }
