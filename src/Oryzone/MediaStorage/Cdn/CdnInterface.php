@@ -11,7 +11,7 @@
 
 namespace Oryzone\MediaStorage\Cdn;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface;
 
 interface CdnInterface
@@ -34,6 +34,6 @@ interface CdnInterface
      * @param   array                                                      $options
      * @return string
      */
-    public function getUrl(Media $media, VariantInterface $variant, $options = array());
+    public function getUrl(MediaInterface $media, VariantInterface $variant, $options = array());
 
 }

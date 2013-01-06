@@ -11,7 +11,7 @@
 
 namespace Oryzone\MediaStorage\Cdn;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
@@ -36,7 +36,7 @@ class LocalCdn implements CdnInterface
     /**
      * {@inheritDoc}
      */
-    public function getUrl(Media $media, VariantInterface $variant, $options = array())
+    public function getUrl(MediaInterface $media, VariantInterface $variant, $options = array())
     {
         $url = $this->path . $variant->getFilename();
 
