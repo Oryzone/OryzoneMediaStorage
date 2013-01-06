@@ -240,7 +240,6 @@ class Variant implements VariantInterface
         $data = array(
             'name'          => $this->name,
             'filename'      => $this->filename,
-            'contentType'   => $this->contentType,
             'options'       => $this->options,
             'mode'          => $this->mode,
             'status'        => $this->status
