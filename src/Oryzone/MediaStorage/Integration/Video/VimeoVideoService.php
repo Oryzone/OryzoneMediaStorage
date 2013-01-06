@@ -114,8 +114,6 @@ class VimeoVideoService extends VideoService
                 if (!is_null($elements) && $elements->length > 0)
                     return $elements->item(0)->nodeValue;
         }
-
-        return $default;
     }
 
     /**
