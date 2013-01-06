@@ -29,7 +29,7 @@ class ResourceNotFoundException extends MediaStorageException
      * @param int $code {@inheritDoc}
      * @param \Exception $previous {@inheritDoc}
      */
-    public function __construct($message = "", $id, $code = 0, \Exception $previous = null)
+    public function __construct($message = "", $id = NULL, $code = 0, \Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
         $this->id = $id;
