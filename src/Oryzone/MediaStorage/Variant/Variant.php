@@ -220,6 +220,8 @@ class Variant implements VariantInterface
     public function setError($error)
     {
         $this->error = $error;
+        if($error !== NULL)
+            $this->status = self::STATUS_ERROR;
     }
 
     /**
@@ -263,8 +265,6 @@ class Variant implements VariantInterface
             $variant->setName($array['name']);
         if( isset($array['filename']) )
             $variant->setFilename($array['filename']);
-        if( isset($array['contentType']) )
-            $variant->setContentType($array['contentType']);
         if( isset($array['options']) )
             $variant->setOptions($array['options']);
         if( isset($array['mode']) )
