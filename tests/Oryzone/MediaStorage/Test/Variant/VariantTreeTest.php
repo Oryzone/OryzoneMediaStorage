@@ -54,55 +54,55 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::addNode
+     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      * @covers Oryzone\MediaStorage\Variant\VariantTree::getNode
      */
     public function testAddGetNode()
     {
         $newVariant = new Variant('new');
-        $this->tree->addNode($newVariant, 'default');
+        $this->tree->add($newVariant, 'default');
         $this->assertEquals($newVariant, $this->tree->getNode('new')->getContent());
     }
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::addNode
+     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException0()
     {
         // root already exists and tries to add a new node as root
-        $this->tree->addNode(new Variant('newRoot'));
+        $this->tree->add(new Variant('newRoot'));
     }
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::addNode
+     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException1()
     {
         // parent node mismatch
-        $this->tree->addNode(new Variant('new'), 'unknown');
+        $this->tree->add(new Variant('new'), 'unknown');
     }
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::addNode
+     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException2()
     {
         // no name on variant
-        $this->tree->addNode(new Variant(), 'default');
+        $this->tree->add(new Variant(), 'default');
     }
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::addNode
+     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException3()
     {
         // name on variant already defined
-        $this->tree->addNode(new Variant('child'), 'default');
-        $this->tree->addNode(new Variant('default'), 'child');
+        $this->tree->add(new Variant('child'), 'default');
+        $this->tree->add(new Variant('default'), 'child');
     }
 
     /**
@@ -110,10 +110,10 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
      */
     public function testVisit()
     {
-        $this->tree->addNode(new Variant('child1'), 'default');
-        $this->tree->addNode(new Variant('child2'), 'default');
-        $this->tree->addNode(new Variant('child1-1'), 'child1');
-        $this->tree->addNode(new Variant('child1-2'), 'child1');
+        $this->tree->add(new Variant('child1'), 'default');
+        $this->tree->add(new Variant('child2'), 'default');
+        $this->tree->add(new Variant('child1-1'), 'child1');
+        $this->tree->add(new Variant('child1-2'), 'child1');
 
         // name-level mapping
         $expectedVisit = array(

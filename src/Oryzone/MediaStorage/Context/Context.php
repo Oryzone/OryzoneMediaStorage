@@ -12,7 +12,8 @@
 namespace Oryzone\MediaStorage\Context;
 
 use Oryzone\MediaStorage\Variant\VariantTree,
-    Oryzone\MediaStorage\Variant\Variant;
+    Oryzone\MediaStorage\Variant\Variant,
+    Oryzone\MediaStorage\Variant\VariantInterface;
 
 class Context implements ContextInterface
 {
@@ -165,16 +166,29 @@ class Context implements ContextInterface
     public function buildVariantTree()
     {
         if($this->lastTree)
-
             return $this->lastTree;
 
         $tree = new VariantTree();
         foreach ($this->variants as $name => $v) {
+            //sets default values if any
+            $mode = VariantInterface::MODE_INSTANT;
+            if(isset($v['mode']))
+                $mode = $v['mode'];
+
+            $process = array();
+            if(isset($v['process']))
+                $process = $v['process'];
+
+            $parent = NULL;
+            if(isset($v['parent']))
+                $parent = $v['parent'];
+
+            //creates the variant instance
             $variant = new Variant();
             $variant->setName($name);
-            $variant->setMode($v['mode']);
-            $variant->setOptions($v['process']);
-            $tree->addNode($variant, $v['parent']);
+            $variant->setMode($mode);
+            $variant->setOptions($process);
+            $tree->add($variant, $parent);
         }
 
         $this->lastTree = $tree;

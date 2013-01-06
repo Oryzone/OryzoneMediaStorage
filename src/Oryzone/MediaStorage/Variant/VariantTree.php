@@ -31,7 +31,8 @@ class VariantTree implements \IteratorAggregate
     public function __construct(VariantInterface $root = NULL)
     {
         $this->nodes = array();
-        $this->addNode($root);
+        if($root !== NULL)
+            $this->add($root);
     }
 
     /**
@@ -45,7 +46,7 @@ class VariantTree implements \IteratorAggregate
     }
 
     /**
-     * Adds a node
+     * Adds a variant (automatically creates a node with a given variant and adds it to the tree)
      *
      * @param  VariantInterface $content
      * @param  string|null      $parentName
@@ -53,7 +54,7 @@ class VariantTree implements \IteratorAggregate
      * an already declared name
      * @return VariantNode
      */
-    public function addNode(VariantInterface $content, $parentName = NULL)
+    public function add(VariantInterface $content, $parentName = NULL)
     {
         $node = new VariantNode($content);
         if ($parentName) {
