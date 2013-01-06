@@ -1,6 +1,15 @@
 <?php
 namespace Oryzone\MediaStorage\Test\Cdn;
 
+/*
+ * This file is part of the Oryzone/MediaStorage package.
+ *
+ * (c) Luciano Mammino <lmammino@oryzone.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Oryzone\MediaStorage\Cdn\LocalCdn,
     Oryzone\MediaStorage\Variant\Variant,
     Oryzone\MediaStorage\Model\SimpleMedia;
