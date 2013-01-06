@@ -66,82 +66,52 @@ class ContextTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getName
-     */
     public function testGetName()
     {
         $this->assertEquals($this->contextName, $this->context->getName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getProviderName
-     */
     public function testGetProviderName()
     {
         $this->assertEquals($this->providerName, $this->context->getProviderName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getProviderOptions
-     */
     public function testGetProviderOptions()
     {
         $this->assertEquals($this->providerOptions, $this->context->getProviderOptions());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getFilesystemName
-     */
     public function testGetFilesystemName()
     {
         $this->assertEquals($this->filesystemName, $this->context->getFilesystemName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getCdnName
-     */
     public function testGetCdnName()
     {
         $this->assertEquals($this->cdnName, $this->context->getCdnName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getNamingStrategyName
-     */
     public function testGetNamingStrategyName()
     {
         $this->assertEquals($this->namingStrategyName, $this->context->getNamingStrategyName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getDefaultVariant
-     */
     public function testGetDefaultVariant()
     {
         $this->assertEquals($this->defaultVariant, $this->context->getDefaultVariant());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::getVariants
-     */
     public function testGetVariants()
     {
         $this->assertEquals($this->variants, $this->context->getVariants());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::hasVariant
-     */
     public function testHasVariant()
     {
         $this->assertFalse($this->context->hasVariant('unknown'));
         $this->assertTrue($this->context->hasVariant('default'));
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Context\Context::buildVariantTree
-     */
     public function testBuildVariantTree()
     {
         $tree = $this->context->buildVariantTree();

@@ -39,32 +39,18 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setName
-     * @covers Oryzone\MediaStorage\Variant\Variant::getName
-     */
     public function testSetGetName()
     {
         $this->object->setName('foo');
         $this->assertEquals('foo', $this->object->getName());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setFilename
-     * @covers Oryzone\MediaStorage\Variant\Variant::getFilename
-     */
     public function testSetGetFilename()
     {
         $this->object->setFilename('filename');
         $this->assertEquals('filename', $this->object->getFilename());
     }
 
-
-
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setMeta
-     * @covers Oryzone\MediaStorage\Variant\Variant::getMeta
-     */
     public function testSetGetMeta()
     {
         $meta = array('foo' => 'bar');
@@ -72,10 +58,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($meta, $this->object->getMeta());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setMetaValue
-     * @covers Oryzone\MediaStorage\Variant\Variant::getMetaValue
-     */
     public function testSetGetMetaValue()
     {
         $this->assertEquals('default', $this->object->getMetaValue('foo', 'default'));
@@ -83,10 +65,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->object->getMetaValue('foo'));
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setOptions
-     * @covers Oryzone\MediaStorage\Variant\Variant::getOptions
-     */
     public function testSetGetOptions()
     {
         $options = array("foo" => NULL, "bar" => "baz");
@@ -94,29 +72,18 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options, $this->object->getOptions());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setMode
-     * @covers Oryzone\MediaStorage\Variant\Variant::getMode
-     */
     public function testSetGetMode()
     {
         $this->object->setMode(Variant::MODE_INSTANT);
         $this->assertEquals(Variant::MODE_INSTANT, $this->object->getMode());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setStatus
-     * @covers Oryzone\MediaStorage\Variant\Variant::getStatus
-     */
     public function testSetGetStatus()
     {
         $this->object->setStatus(Variant::STATUS_READY);
         $this->assertEquals(Variant::STATUS_READY, $this->object->getStatus());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::isReady
-     */
     public function testIsReady()
     {
         $this->assertFalse($this->object->isReady());
@@ -140,9 +107,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->isReady());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::hasError
-     */
     public function testHasError()
     {
         $this->assertFalse($this->object->hasError());
@@ -150,28 +114,18 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->hasError());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::setError
-     * @covers Oryzone\MediaStorage\Variant\Variant::getError
-     */
     public function testSetGetError()
     {
         $this->object->setError('error');
         $this->assertEquals('error', $this->object->getError());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::invalidate
-     */
     public function testInvalidate()
     {
         $this->object->invalidate();
         $this->assertEquals(Variant::STATUS_INVALIDATED, $this->object->getStatus());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::toArray
-     */
     public function testToArray()
     {
         $data = array(
@@ -193,9 +147,6 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($data, $this->object->toArray());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\Variant::fromArray
-     */
     public function testFromArray()
     {
         $data = array(

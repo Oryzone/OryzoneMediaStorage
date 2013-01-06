@@ -59,25 +59,11 @@ class VariantNodeTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::__construct
-     */
-    public function testConstruct()
-    {
-        $node = new VariantNode(new Variant(), NULL);
-    }
-
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::getChildren
-     */
     public function testGetChildren()
     {
         $this->assertContains($this->node, $this->parentNode->getChildren());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::addChild
-     */
     public function testAddChild()
     {
         $newNode = new VariantNode(new Variant(), $this->parentNode);
@@ -86,10 +72,6 @@ class VariantNodeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($newNode, $this->parentNode->getChildren());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::setContent
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::getContent
-     */
     public function testSetGetContent()
     {
         $this->assertEquals($this->variant, $this->node->getContent());
@@ -98,10 +80,6 @@ class VariantNodeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($newVariant, $this->node->getContent());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::setParent
-     * @covers Oryzone\MediaStorage\Variant\VariantNode::getParent
-     */
     public function testSetGetParent()
     {
         $this->assertEquals($this->parentNode, $this->node->getParent());

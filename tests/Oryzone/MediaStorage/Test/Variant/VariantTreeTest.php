@@ -45,18 +45,11 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::getRoot
-     */
     public function testGetRoot()
     {
         $this->assertEquals($this->rootVariant, $this->tree->getRoot()->getContent());
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::getNode
-     */
     public function testAddGetNode()
     {
         $newVariant = new Variant('new');
@@ -66,7 +59,6 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException0()
     {
@@ -76,7 +68,6 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException1()
     {
@@ -86,7 +77,6 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException2()
     {
@@ -96,7 +86,6 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::add
      */
     public function testAddNodeException3()
     {
@@ -105,9 +94,6 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
         $this->tree->add(new Variant('default'), 'child');
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::visit
-     */
     public function testVisit()
     {
         $this->tree->add(new Variant('child1'), 'default');
@@ -132,19 +118,14 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedVisit, $visitedNodes);
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::getIterator
-     */
     public function testGetIterator()
     {
         $this->assertTrue( ($this->tree->getIterator() instanceof \ArrayIterator) );
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Variant\VariantTree::__toString
-     */
     public function test__toString()
     {
+        $this->tree->add(new Variant('child1'), 'default');
         $this->assertTrue(is_string($this->tree->__toString()));
     }
 }

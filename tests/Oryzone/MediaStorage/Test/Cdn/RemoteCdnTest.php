@@ -32,9 +32,6 @@ class RemoteCdnTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Cdn\RemoteCdn::setConfiguration
-     */
     public function testSetConfiguration()
     {
         $this->cdn->setConfiguration(array('base_url' => 'http://cdn.example.com/'));
@@ -42,16 +39,12 @@ class RemoteCdnTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Cdn\RemoteCdn::setConfiguration
      */
     public function testSetConfigurationException()
     {
         $this->cdn->setConfiguration(array('foo' => 'bar'));
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Cdn\RemoteCdn::getUrl
-     */
     public function testGetUrl()
     {
         $media = new SimpleMedia();

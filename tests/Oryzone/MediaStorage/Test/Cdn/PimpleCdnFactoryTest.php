@@ -32,10 +32,6 @@ class PimpleCdnFactoryTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-    /**
-     * @covers Oryzone\MediaStorage\Cdn\PimpleCdnFactory::addDefinition
-     * @covers Oryzone\MediaStorage\Cdn\PimpleCdnFactory::get
-     */
     public function testAddDefinitionAndGet()
     {
         $mockCdn = $this->getMock('\Oryzone\MediaStorage\Cdn\CdnInterface');
@@ -47,7 +43,6 @@ class PimpleCdnFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidArgumentException
-     * @covers Oryzone\MediaStorage\Cdn\PimpleCdnFactory::get
      */
     public function testGetException0()
     {
@@ -57,7 +52,6 @@ class PimpleCdnFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Oryzone\MediaStorage\Exception\InvalidConfigurationException
-     * @covers Oryzone\MediaStorage\Cdn\PimpleCdnFactory::get
      */
     public function testGetException1()
     {
