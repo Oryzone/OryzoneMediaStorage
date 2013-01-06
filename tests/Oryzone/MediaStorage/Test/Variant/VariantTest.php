@@ -69,6 +69,7 @@ class VariantTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGetMetaValue()
     {
+        $this->assertEquals('default', $this->object->getMetaValue('foo', 'default'));
         $this->object->setMetaValue('foo', 'bar');
         $this->assertEquals('bar', $this->object->getMetaValue('foo'));
     }

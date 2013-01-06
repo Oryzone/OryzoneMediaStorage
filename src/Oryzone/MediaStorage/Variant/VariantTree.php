@@ -26,12 +26,12 @@ class VariantTree implements \IteratorAggregate
     /**
      * Constructor. Build a new tree
      *
-     * @param VariantNode $root
+     * @param VariantInterface $root
      */
-    public function __construct(VariantNode $root = NULL)
+    public function __construct(VariantInterface $root = NULL)
     {
-        $this->root = $root;
         $this->nodes = array();
+        $this->addNode($root);
     }
 
     /**
@@ -49,6 +49,8 @@ class VariantTree implements \IteratorAggregate
      *
      * @param  VariantInterface $content
      * @param  string|null      $parentName
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException if new node contains a variant with no name or
+     * an already declared name
      * @return VariantNode
      */
     public function addNode(VariantInterface $content, $parentName = NULL)
@@ -59,8 +61,15 @@ class VariantTree implements \IteratorAggregate
             $node->setParent($parent);
             $parent->addChild($node);
         } else {
+            if($this->root !== NULL)
+                throw new InvalidArgumentException('You tried to add a node as root (because you gave a NULL $parentName) but a root node is already present');
             $this->root = $node;
         }
+        if($content->getName() == "")
+            throw new InvalidArgumentException('A variant with no name can\'t be added to the tree');
+        if(isset($this->nodes[$content->getName()]))
+            throw new InvalidArgumentException(sprintf('A variant with the name "%s" has already been added to the tree', $content->getName()));
+
         $this->nodes[$content->getName()] = $node;
 
         return $node;

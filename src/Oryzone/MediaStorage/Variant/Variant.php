@@ -62,6 +62,16 @@ class Variant implements VariantInterface
     protected $error;
 
     /**
+     * Constructor
+     *
+     * @param string $name The name of the variant
+     */
+    public function __construct($name = NULL)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getName()
