@@ -11,7 +11,10 @@
 
 namespace Oryzone\MediaStorage\Filesystem;
 
-use Oryzone\MediaStorage\Exception\InvalidArgumentException;
+use Gaufrette\Filesystem;
+
+use Oryzone\MediaStorage\Exception\InvalidArgumentException,
+    Oryzone\MediaStorage\Exception\InvalidConfigurationException;
 
 /**
  * Factory for gaufrette filesystems (to decouple the library from the symfony bundle for gaufrette)
@@ -42,11 +45,15 @@ class FilesystemFactory implements FilesystemFactoryInterface, \IteratorAggregat
      */
     public function get($filesystemName)
     {
-        if (!isset($this->map[$filesystemName])) {
+        if (!isset($this->map[$filesystemName]))
             throw new InvalidArgumentException(sprintf('No filesystem register for name "%s"', $filesystemName));
-        }
 
-        return $this->map[$filesystemName];
+        $filesystem = $this->map[$filesystemName];
+
+        if(! $filesystem instanceof Filesystem)
+            throw new InvalidConfigurationException(sprintf('The filesystem registered with the name "%s" is not an instance of "\Gaufrette\Filesystem"', $filesystemName));
+
+        return $filesystem;
     }
 
     /**
