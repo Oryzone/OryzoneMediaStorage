@@ -12,7 +12,7 @@
 namespace Oryzone\MediaStorage\Provider;
 
 use Oryzone\MediaStorage\Model\MediaInterface,
-    Oryzone\MediaStorage\Context\Context,
+    Oryzone\MediaStorage\Context\ContextInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
@@ -58,7 +58,7 @@ class VimeoProvider extends VideoServiceProvider
     /**
      * {@inheritDoc}
      */
-    public function prepare(MediaInterface $media, Context $context)
+    public function prepare(MediaInterface $media, ContextInterface $context)
     {
         $id = $this->getIdFromContent($media->getContent());
 

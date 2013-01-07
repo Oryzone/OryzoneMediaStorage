@@ -13,7 +13,7 @@ namespace Oryzone\MediaStorage\Provider;
 
 use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
-    Oryzone\MediaStorage\Context\Context;
+    Oryzone\MediaStorage\Context\ContextInterface;
 
 //use Symfony\Component\Form\FormBuilderInterface;
 
@@ -79,12 +79,12 @@ interface ProviderInterface
      * Executed each time a media is about to be saved, before the process method
      * Generally used to set metadata
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface  $media
-     * @param \Oryzone\MediaStorage\Context\Context       $context
+     * @param \Oryzone\MediaStorage\Model\MediaInterface      $media
+     * @param \Oryzone\MediaStorage\Context\ContextInterface  $context
      *
      * @return mixed
      */
-    public function prepare(MediaInterface $media, Context $context);
+    public function prepare(MediaInterface $media, ContextInterface $context);
 
     /**
      * Process the media to create a variant. Should return a <code>File</code> instance referring
