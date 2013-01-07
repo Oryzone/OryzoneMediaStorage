@@ -11,15 +11,16 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Context\Context,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 class VimeoProvider extends VideoServiceProvider
 {
-    protected $name = 'vimeo';
-
+    /**
+     * Canonical url scheme
+     */
     const CANONICAL_URL = 'http://vimeo.com/%s';
 
     /**
@@ -31,6 +32,14 @@ class VimeoProvider extends VideoServiceProvider
      * {@inheritDoc}
      */
     const VALIDATION_REGEX_ID = '%^\d+$%';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'vimeo';
+    }
 
     /**
      * {@inheritDoc}
@@ -49,7 +58,7 @@ class VimeoProvider extends VideoServiceProvider
     /**
      * {@inheritDoc}
      */
-    public function prepare(Media $media, Context $context)
+    public function prepare(MediaInterface $media, Context $context)
     {
         $id = $this->getIdFromContent($media->getContent());
 
@@ -77,7 +86,7 @@ class VimeoProvider extends VideoServiceProvider
     /**
      * {@inheritDoc}
      */
-    public function render(Media $media, VariantInterface $variant, $url = NULL, $options = array())
+    public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
         $defaultOptions = array(
             'mode' => 'video',

@@ -17,12 +17,11 @@ namespace Oryzone\MediaStorage\Provider;
 use Imagine\Image\ImagineInterface;
 
 use Oryzone\MediaStorage\Exception\ProviderPrepareException,
-    Oryzone\MediaStorage\Model\Media,
+    Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Integration\Video\VideoServiceInterface;
 
 abstract class VideoServiceProvider extends ImageProvider
 {
-
     /**
      * Regex to validate service video urls
      * @const string VALIDATION_REGEX_URL
@@ -81,7 +80,7 @@ abstract class VideoServiceProvider extends ImageProvider
     /**
      * {@inheritDoc}
      */
-    public function hasChangedContent(Media $media)
+    public function hasChangedContent(MediaInterface $media)
     {
         return ($media->getContent() != NULL && $this->getIdFromContent($media) !== $media->getMetaValue('id'));
     }
@@ -101,11 +100,11 @@ abstract class VideoServiceProvider extends ImageProvider
      *
      * @param $url
      * @param $destination
-     * @param Media $media
+     * @param MediaInterface $media
      * @throws \Oryzone\MediaStorage\Exception\ProviderPrepareException
      * @return void
      */
-    protected function downloadFile($url, $destination, Media $media = NULL)
+    protected function downloadFile($url, $destination, MediaInterface $media = NULL)
     {
         try
         {

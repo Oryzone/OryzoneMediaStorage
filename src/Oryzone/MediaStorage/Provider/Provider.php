@@ -13,7 +13,7 @@ namespace Oryzone\MediaStorage\Provider;
 
 //use Symfony\Component\Form\FormBuilderInterface;
 
-use Oryzone\MediaStorage\Model\Media;
+use Oryzone\MediaStorage\Model\MediaInterface;
 
 abstract class Provider implements ProviderInterface
 {
@@ -24,11 +24,6 @@ abstract class Provider implements ProviderInterface
      * @var int
      */
     protected static $contentType = self::CONTENT_TYPE_FILE;
-
-    /**
-     * @var string $name
-     */
-    protected $name;
 
     /**
      * @var array $tempFiles
@@ -47,14 +42,6 @@ abstract class Provider implements ProviderInterface
     {
         $this->tempFiles = array();
         $this->options = array();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -86,7 +73,7 @@ abstract class Provider implements ProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function hasChangedContent(Media $media)
+    public function hasChangedContent(MediaInterface $media)
     {
         return ($media->getContent() !== NULL);
     }

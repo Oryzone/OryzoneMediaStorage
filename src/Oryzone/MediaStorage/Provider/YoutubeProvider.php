@@ -14,15 +14,16 @@ namespace Oryzone\MediaStorage\Provider;
 //use Symfony\Component\Form\FormBuilderInterface;
 
 use Oryzone\MediaStorage\Provider\Provider,
-    Oryzone\MediaStorage\Model\Media,
+    Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Context\Context,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 class YoutubeProvider extends VideoServiceProvider
 {
-    protected $name = 'youtube';
-
+    /**
+     * Canonical url scheme
+     */
     const CANONICAL_URL = 'http://www.youtube.com/watch?v=%s';
 
     /**
@@ -34,6 +35,14 @@ class YoutubeProvider extends VideoServiceProvider
      * {@inheritDoc}
      */
     const VALIDATION_REGEX_ID = '%^[^"&?/ ]{11}$%i';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'youtube';
+    }
 
     /**
      * {@inheritDoc}
@@ -52,7 +61,7 @@ class YoutubeProvider extends VideoServiceProvider
     /**
      * {@inheritDoc}
      */
-    public function prepare(Media $media, Context $context)
+    public function prepare(MediaInterface $media, Context $context)
     {
         $id = $this->getIdFromContent($media->getContent());
 
@@ -81,7 +90,7 @@ class YoutubeProvider extends VideoServiceProvider
     /**
      * {@inheritDoc}
      */
-    public function render(Media $media, VariantInterface $variant, $url = NULL, $options = array())
+    public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
         $defaultOptions = array(
             'mode' => 'video',

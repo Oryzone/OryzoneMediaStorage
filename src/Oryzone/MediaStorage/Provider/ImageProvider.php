@@ -11,15 +11,13 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\ProviderProcessException,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 class ImageProvider extends FileProvider
 {
-    protected $name = 'image';
-
     /**
      * @var string $tempDir
      */
@@ -72,6 +70,14 @@ class ImageProvider extends FileProvider
         $this->checkTempDir($tempDir);
         $this->tempDir = $tempDir;
         $this->imagine = $imagine;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'image';
     }
 
     /**
@@ -152,7 +158,7 @@ class ImageProvider extends FileProvider
     /**
      * {@inheritDoc}
      */
-    public function process(Media $media, VariantInterface $variant, \SplFileInfo $source = NULL)
+    public function process(MediaInterface $media, VariantInterface $variant, \SplFileInfo $source = NULL)
     {
         $options = $variant->getOptions();
         $result = $source;
@@ -216,7 +222,7 @@ class ImageProvider extends FileProvider
     /**
      * {@inheritDoc}
      */
-    public function render(Media $media, VariantInterface $variant, $url = NULL, $options = array())
+    public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
         $attributes = array(
             'title' => $media->getName(),

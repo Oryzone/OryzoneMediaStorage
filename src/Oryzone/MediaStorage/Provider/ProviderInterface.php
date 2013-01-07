@@ -11,7 +11,7 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Context\Context;
 
@@ -60,11 +60,11 @@ interface ProviderInterface
     /**
      * Detects if the current content is a new one (used in case of update)
      *
-     * @param \Oryzone\MediaStorage\Model\Media $media
+     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
      *
      * @return boolean
      */
-    public function hasChangedContent(Media $media);
+    public function hasChangedContent(MediaInterface $media);
 
     /**
      * Checks if the current provider supports a given Media
@@ -79,36 +79,36 @@ interface ProviderInterface
      * Executed each time a media is about to be saved, before the process method
      * Generally used to set metadata
      *
-     * @param \Oryzone\MediaStorage\Model\Media     $media
-     * @param \Oryzone\MediaStorage\Context\Context $context
+     * @param \Oryzone\MediaStorage\Model\MediaInterface  $media
+     * @param \Oryzone\MediaStorage\Context\Context       $context
      *
      * @return mixed
      */
-    public function prepare(Media $media, Context $context);
+    public function prepare(MediaInterface $media, Context $context);
 
     /**
      * Process the media to create a variant. Should return a <code>File</code> instance referring
      * the resulting file
      *
-     * @param \Oryzone\MediaStorage\Model\Media              $media
+     * @param \Oryzone\MediaStorage\Model\MediaInterface     $media
      * @param \Oryzone\MediaStorage\Variant\VariantInterface $variant
      * @param \SplFileInfo                                   $source
      *
-     * @return File|null
+     * @return \SplFileInfo|null
      */
-    public function process(Media $media, VariantInterface $variant, \SplFileInfo $source = NULL);
+    public function process(MediaInterface $media, VariantInterface $variant, \SplFileInfo $source = NULL);
 
     /**
      * Renders a variant to HTML code. Useful for twig (or other template engines) integrations
      *
-     * @param \Oryzone\MediaStorage\Model\Media              $media
+     * @param \Oryzone\MediaStorage\Model\MediaInterface     $media
      * @param \Oryzone\MediaStorage\Variant\VariantInterface $variant
      * @param string|null                                    $url
      * @param array                                          $options
      *
      * @return string
      */
-    public function render(Media $media, VariantInterface $variant, $url = NULL, $options = array());
+    public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array());
 
     /**
      * Builds a form to handle the media

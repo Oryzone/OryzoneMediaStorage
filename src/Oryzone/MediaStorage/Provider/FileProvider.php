@@ -11,13 +11,12 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Context\Context;
 
 class FileProvider extends Provider
 {
-    protected $name = 'file';
 
     /**
      * Constructor
@@ -30,7 +29,15 @@ class FileProvider extends Provider
     /**
      * {@inheritDoc}
      */
-    public function hasChangedContent(Media $media)
+    public function getName()
+    {
+        return 'file';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasChangedContent(MediaInterface $media)
     {
         return ($media->getContent() != NULL && $media->getMetaValue('id') !== md5_file($media->getContent()));
     }
@@ -49,7 +56,7 @@ class FileProvider extends Provider
     /**
      * {@inheritDoc}
      */
-    public function prepare(Media $media, Context $context)
+    public function prepare(MediaInterface $media, Context $context)
     {
         $media->setMetaValue('id', md5_file($media->getContent()));
     }
@@ -57,7 +64,7 @@ class FileProvider extends Provider
     /**
      * {@inheritDoc}
      */
-    public function process(Media $media, VariantInterface $variant, File $source = NULL)
+    public function process(MediaInterface $media, VariantInterface $variant, File $source = NULL)
     {
         $variant->setMetaValue('size', $source->getSize());
         return $source;
@@ -66,7 +73,7 @@ class FileProvider extends Provider
     /**
      * {@inheritDoc}
      */
-    public function render(Media $media, VariantInterface $variant, $url = NULL, $options = array())
+    public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
         $attributes = array(
             'title' => $media->getName(). ' ('. $variant->getMetaValue('size') . ')'
