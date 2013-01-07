@@ -82,13 +82,19 @@ class MediaTest extends \PHPUnit_Framework_TestCase
     public function testHasAddRemoveVariant()
     {
         $this->assertFalse($this->media->hasVariant('default'));
+
         $variant = $this->getMock('\Oryzone\MediaStorage\Variant\VariantInterface');
         $variant->expects($this->any())
                 ->method('getName')
                 ->will($this->returnValue('default'));
         $this->media->addVariant($variant);
+
         $this->assertTrue($this->media->hasVariant('default'));
-        $this->media->removeVariant('default');
+
+        // checks return value from removeVariant
+        $this->assertTrue($this->media->removeVariant('default'));
+        $this->assertFalse($this->media->removeVariant('default'));
+
         $this->assertFalse($this->media->hasVariant('default'));
     }
 
