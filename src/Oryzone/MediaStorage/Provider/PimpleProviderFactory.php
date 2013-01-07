@@ -18,16 +18,26 @@ use Oryzone\MediaStorage\Exception\InvalidArgumentException,
 
 class PimpleProviderFactory implements ProviderFactoryInterface
 {
+    /**
+     * @var \Pimple $container
+     */
     protected $container;
 
     /**
-     * Container
+     * @var string $namespace
+     */
+    protected $namespace;
+
+    /**
+     * Constructor
      *
      * @param \Pimple $container
+     * @param string $namespace
      */
-    public function __construct(Pimple $container)
+    public function __construct(Pimple $container, $namespace = 'mediastorage_provider_')
     {
         $this->container = $container;
+        $this->namespace = $namespace;
     }
 
     /**
@@ -38,6 +48,7 @@ class PimpleProviderFactory implements ProviderFactoryInterface
      */
     public function addDefinition($name, \Closure $definition)
     {
+        $name = $this->namespace . $name;
         $this->container[$name] = $definition;
     }
 
@@ -46,6 +57,7 @@ class PimpleProviderFactory implements ProviderFactoryInterface
      */
     public function get($providerName, $providerOptions = array())
     {
+        $providerName = $this->namespace . $providerName;
         try
         {
             $provider = $this->container[$providerName];

@@ -25,6 +25,11 @@ class PimpleCdnFactory implements CdnFactoryInterface
     protected $container;
 
     /**
+     * @var string $namespace
+     */
+    protected $namespace;
+
+    /**
      * @var array $config
      */
     protected $config;
@@ -33,10 +38,12 @@ class PimpleCdnFactory implements CdnFactoryInterface
      * Constructor
      *
      * @param \Pimple $container
+     * @param string $namespace
      */
-    public function __construct(Pimple $container)
+    public function __construct(Pimple $container, $namespace = 'mediastorage_cdn_')
     {
         $this->container = $container;
+        $this->namespace = $namespace;
         $this->config = array();
     }
 
@@ -47,6 +54,7 @@ class PimpleCdnFactory implements CdnFactoryInterface
      */
     public function addDefinition($name, \Closure $definition, $config = array())
     {
+        $name = $this->namespace . $name;
         $this->container[$name] = $definition;
         $this->config[$name] = $config;
     }
@@ -56,6 +64,7 @@ class PimpleCdnFactory implements CdnFactoryInterface
      */
     public function get($cdnName)
     {
+        $cdnName = $this->namespace . $cdnName;
         try
         {
             $cdn = $this->container[$cdnName];
