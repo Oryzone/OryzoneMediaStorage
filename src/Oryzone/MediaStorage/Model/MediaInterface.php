@@ -25,6 +25,14 @@ interface MediaInterface
     public function getId();
 
     /**
+     * Set content
+     *
+     * @param mixed $content
+     * @return void
+     */
+    public function setContent($content);
+
+    /**
      * Get content
      *
      * @return mixed|null
@@ -47,11 +55,27 @@ interface MediaInterface
     public function setContext(ContextInterface $context);
 
     /**
+     * Set created at
+     *
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt($createdAt);
+
+    /**
      * Get created at
      *
      * @return \DateTime
      */
     public function getCreatedAt();
+
+    /**
+     * Set a metadata value for a given key
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function setMetaValue($key, $value);
 
     /**
      * Get a metadata value for a given key
@@ -63,6 +87,13 @@ interface MediaInterface
      * @return mixed|null
      */
     public function getMetaValue($key, $default = NULL);
+
+    /**
+     * Set modified at
+     *
+     * @param \DateTime $modifiedAt
+     */
+    public function setModifiedAt($modifiedAt);
 
     /**
      * Get modified at

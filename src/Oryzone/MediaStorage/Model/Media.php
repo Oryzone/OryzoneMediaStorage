@@ -79,9 +79,7 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * Set content
-     *
-     * @param mixed $content
+     * {@inheritDoc}
      */
     public function setContent($content)
     {
@@ -114,9 +112,7 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * Set created at
-     *
-     * @param \DateTime $createdAt
+     * {@inheritDoc}
      */
     public function setCreatedAt($createdAt)
     {
@@ -164,10 +160,7 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * Sets a metadata value
-     *
-     * @param string $key
-     * @param mixed  $value
+     * {@inheritDoc}
      */
     public function setMetaValue($key, $value)
     {
@@ -178,9 +171,7 @@ abstract class Media implements MediaInterface
     }
 
     /**
-     * Set modified at
-     *
-     * @param \DateTime $modifiedAt
+     * {@inheritDoc}
      */
     public function setModifiedAt($modifiedAt)
     {
