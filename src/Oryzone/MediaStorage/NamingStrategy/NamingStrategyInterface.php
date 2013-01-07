@@ -13,7 +13,7 @@ namespace Oryzone\MediaStorage\NamingStrategy;
 
 use Gaufrette\Filesystem;
 
-use Oryzone\MediaStorage\Model\Media,
+use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface;
 
 interface NamingStrategyInterface
@@ -21,12 +21,12 @@ interface NamingStrategyInterface
 
     /**
      * Generates a name for a file to be stored.
-     * Note: should not add file extension
+     * <b>Note</b>: should not add file extension
      *
-     * @param  \Oryzone\MediaStorage\Model\Media              $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface     $media
      * @param  \Oryzone\MediaStorage\Variant\VariantInterface $variant
      * @param  \Gaufrette\Filesystem                          $filesystem
      * @return string
      */
-    public function generateName(Media $media, VariantInterface $variant, Filesystem $filesystem);
+    public function generateName(MediaInterface $media, VariantInterface $variant, Filesystem $filesystem);
 }
