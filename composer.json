@@ -30,6 +30,7 @@
         "knplabs/gaufrette": "0.2.*@dev"
     },
     "require-dev": {
+        "mikey179/vfsStream": "dev-master",
         "pimple/pimple": "1.0.*@dev",
         "doctrine/common": "*",
         "imagine/Imagine": "*",
@@ -37,7 +38,6 @@
     },
     "suggest": {
         "oryzone/media-storage-bundle": "*",
-        "mikey179/vfsStream": "dev-master",
         "pimple/pimple": "To use default factories",
         "doctrine/common": "For caching request in integration services",
         "imagine/Imagine": "To process images in Image and Video providers",
