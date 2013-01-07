@@ -37,6 +37,7 @@
     },
     "suggest": {
         "oryzone/media-storage-bundle": "*",
+        "mikey179/vfsStream": "dev-master",
         "pimple/pimple": "To use default factories",
         "doctrine/common": "For caching request in integration services",
         "imagine/Imagine": "To process images in Image and Video providers",
