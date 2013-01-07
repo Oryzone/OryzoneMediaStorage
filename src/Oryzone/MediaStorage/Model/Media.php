@@ -75,6 +75,7 @@ abstract class Media implements MediaInterface
         $this->content = $content;
         $this->context = $contextName;
         $this->createdAt = $this->modifiedAt = new \DateTime();
+        $this->variants = array();
     }
 
     /**
