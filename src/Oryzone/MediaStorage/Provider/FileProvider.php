@@ -82,7 +82,6 @@ class FileProvider extends Provider
             $attributes = array_merge($attributes, $options['attributes']);
 
         $htmlAttributes = '';
-        if(isset($options['attributes']))
             foreach($attributes as $key => $value)
                 if($value !== NULL)
                     $htmlAttributes .= $key . '="' . $value . '" ';

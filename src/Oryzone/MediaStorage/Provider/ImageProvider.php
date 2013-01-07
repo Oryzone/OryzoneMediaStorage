@@ -234,10 +234,9 @@ class ImageProvider extends FileProvider
             $attributes = array_merge($attributes, $options['attributes']);
 
         $htmlAttributes = '';
-        if(isset($options['attributes']))
-            foreach($attributes as $key => $value)
-                if($value !== NULL)
-                    $htmlAttributes .= $key . ($value !== '' ?('="' . $value. '"'):'') . ' ';
+        foreach($attributes as $key => $value)
+            if($value !== NULL)
+                $htmlAttributes .= $key . ($value !== '' ?('="' . $value. '"'):'') . ' ';
 
         return sprintf('<img src="%s" %s/>',
             $url, $htmlAttributes);

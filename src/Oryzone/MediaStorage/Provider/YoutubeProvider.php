@@ -126,10 +126,9 @@ class YoutubeProvider extends VideoServiceProvider
         }
 
         $htmlAttributes = '';
-        if(isset($options['attributes']))
-            foreach($options['attributes'] as $key => $value)
-                if($value !== NULL)
-                    $htmlAttributes .= $key . ($value !== '' ?('="' . $value. '"'):'') . ' ';
+        foreach($options['attributes'] as $key => $value)
+            if($value !== NULL)
+                $htmlAttributes .= $key . ($value !== '' ?('="' . $value. '"'):'') . ' ';
 
         if($options['mode'] == 'video')
             $code = sprintf('<iframe src="http://www.youtube.com/embed/%s" %s></iframe>', $media->getMetaValue('id'), $htmlAttributes);
