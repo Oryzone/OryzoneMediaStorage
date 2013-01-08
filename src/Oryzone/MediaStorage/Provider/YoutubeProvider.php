@@ -71,18 +71,21 @@ class YoutubeProvider extends VideoServiceProvider
 
             $previewImageUrl = $this->service->getMetaValue('thumbnail');
             $previewImageFile = sprintf('%syoutube_preview_%s.jpg', $this->tempDir, $id);
-            $this->addTempFile($previewImageFile);
             if(!file_exists($previewImageFile))
                 $this->downloadFile($previewImageUrl, $previewImageFile, $media);
+            $this->addTempFile($previewImageFile);
             $media->setContent($previewImageFile);
 
             $media->setMetaValue('id', $id);
 
-            foreach($this->options['metadata'] as $metaName => $mediaMetaName)
+            if(isset($this->options['metadata']))
             {
-                $value = $this->service->getMetaValue($metaName);
-                if($value !== NULL)
-                    $media->setMetaValue($mediaMetaName, $value);
+                foreach($this->options['metadata'] as $metaName => $mediaMetaName)
+                {
+                    $value = $this->service->getMetaValue($metaName);
+                    if($value !== NULL)
+                        $media->setMetaValue($mediaMetaName, $value);
+                }
             }
         }
     }
