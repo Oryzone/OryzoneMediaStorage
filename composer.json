@@ -44,6 +44,6 @@
         "kriswallsmith/buzz": "For the API http requests used in Youtube and Vimeo providers"
     },
     "autoload": {
-        "psr-0": { "Oryzone": "src/" }
+        "psr-0": { "Oryzone": "lib/" }
     }
 }
