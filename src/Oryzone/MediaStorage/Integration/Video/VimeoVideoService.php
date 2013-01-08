@@ -11,7 +11,7 @@
 
 namespace Oryzone\MediaStorage\Integration\Video;
 
-use Oryzone\MediaStorage\Exception\Integration\ResourceNotFoundException;
+use Oryzone\MediaStorage\Exception\ResourceNotFoundException;
 
 class VimeoVideoService extends VideoService
 {

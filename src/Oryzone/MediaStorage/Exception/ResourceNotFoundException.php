@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oryzone\MediaStorage\Exception\Integration;
-
-use Oryzone\MediaStorage\Exception\MediaStorageException;
+namespace Oryzone\MediaStorage\Exception;
 
 class ResourceNotFoundException extends MediaStorageException
 {

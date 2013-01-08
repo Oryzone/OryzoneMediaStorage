@@ -19,7 +19,7 @@ interface VideoServiceInterface
      *
      * @param string $id a unique identificative string for the video (generally the video id or the video url)
      * @param array $options an optional array of options
-     * @throws \Oryzone\MediaStorage\Exception\Integration\ResourceNotFoundException if cannot find the resource
+     * @throws \Oryzone\MediaStorage\Exception\ResourceNotFoundException if cannot find the resource
      * (generally due to incorrect id)
      *
      * @return boolean <code>TRUE</code> if it loaded successfully
