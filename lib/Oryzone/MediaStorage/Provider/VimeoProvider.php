@@ -62,8 +62,7 @@ class VimeoProvider extends VideoServiceProvider
     {
         $id = $this->getIdFromContent($media->getContent());
 
-        if($id !== NULL)
-        {
+        if ($id !== NULL) {
             $this->service->load($id);
 
             $previewImageUrl = $this->service->getMetaValue('thumbnail_large');
@@ -74,10 +73,8 @@ class VimeoProvider extends VideoServiceProvider
             $media->setContent($previewImageFile);
 
             $media->setMetaValue('id', $id);
-            if(isset($this->options['metadata']))
-            {
-                foreach((array)$this->options['metadata'] as $metaName => $mediaMetaName)
-                {
+            if (isset($this->options['metadata'])) {
+                foreach ((array) $this->options['metadata'] as $metaName => $mediaMetaName) {
                     $value = $this->service->getMetaValue($metaName);
                     if($value !== NULL)
                         $media->setMetaValue($mediaMetaName, $value);
@@ -101,8 +98,7 @@ class VimeoProvider extends VideoServiceProvider
         if($options['mode'] != 'video' && $options['mode'] != 'image')
             throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "image", "video"', $options['mode']) );
 
-        switch($options['mode'])
-        {
+        switch ($options['mode']) {
             case 'video':
                 $options['attributes'] = array_merge(
                     array(

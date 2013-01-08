@@ -141,8 +141,8 @@ class MediaStorage implements MediaStorageInterface
      * Creates an instance of \SplFileInfo instance from a source.
      * Source may be a string (of a path) an instance of SPL <code>File</code>
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface      $media
-     * @param \Oryzone\MediaStorage\Variant\VariantInterface  $variant
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface     $media
+     * @param  \Oryzone\MediaStorage\Variant\VariantInterface $variant
      * @throws Exception\IOException
      * @return \SplFileInfo
      */
@@ -157,6 +157,7 @@ class MediaStorage implements MediaStorageInterface
 
             return new \SplFileInfo($source);
         } elseif(is_object($source) && $source instanceof \SplFileInfo)
+
             return $source;
 
         throw new IOException(
@@ -275,7 +276,7 @@ class MediaStorage implements MediaStorageInterface
      * Processes a given media
      *
      * @param Model\Media $media
-     * @param bool $isUpdate
+     * @param bool        $isUpdate
      *
      * @throws Exception\VariantProcessingException
      * @return bool
@@ -298,8 +299,7 @@ class MediaStorage implements MediaStorageInterface
             {
                 $variant = $node->getContent();
                 $parent = $node->getParent() ? $node->getParent()->getContent() : NULL;
-                if($isUpdate && $media->hasVariant($variant->getName()))
-                {
+                if ($isUpdate && $media->hasVariant($variant->getName())) {
                     $existingVariant = $media->getVariantInstance($variant->getName());
                     if($existingVariant->isReady())
                         $filesystem->delete($existingVariant->getFilename());
@@ -353,6 +353,7 @@ class MediaStorage implements MediaStorageInterface
         $provider->removeTempFiles();
 
         $this->eventDispatcherAdapter->onAfterProcess($media);
+
         return TRUE; // marks the media as updated
     }
 
@@ -364,8 +365,7 @@ class MediaStorage implements MediaStorageInterface
         $context = $this->getContext($media->getContext());
         $provider = $this->getProvider($context->getProviderName(), $context->getProviderOptions());
 
-        if(!$isUpdate || $isUpdate && $provider->hasChangedContent($media))
-        {
+        if (!$isUpdate || $isUpdate && $provider->hasChangedContent($media)) {
             if(!$media->getContext())
                 $media->setContext($context->getName());
 
@@ -375,6 +375,7 @@ class MediaStorage implements MediaStorageInterface
                     $provider, $media);
 
             $provider->prepare($media, $context);
+
             return TRUE;
         }
 
@@ -435,8 +436,7 @@ class MediaStorage implements MediaStorageInterface
         $context = $this->getContext($media->getContext());
         $filesystem = $this->getFilesystem($context->getFilesystemName());
 
-        foreach($media->getVariants() as $name => $value)
-        {
+        foreach ($media->getVariants() as $name => $value) {
             $variant = $media->getVariantInstance($name);
             if($variant->isReady() && $filesystem->has($variant->getFilename()))
                 $filesystem->delete($variant->getFilename());
@@ -457,6 +457,7 @@ class MediaStorage implements MediaStorageInterface
         $context = $this->getContext($media->getContext());
         $cdn = $this->getCdn($context->getCdnName());
         $variant = $media->getVariantInstance($variant);
+
         return $cdn->getUrl($media, $variant, $options);
     }
 
@@ -467,8 +468,7 @@ class MediaStorage implements MediaStorageInterface
     {
         $context = $this->getContext($media->getContext());
 
-        if($variant === NULL)
-        {
+        if ($variant === NULL) {
             if($context->getDefaultVariant() !== NULL)
                 $variant = $context->getDefaultVariant();
             else

@@ -24,17 +24,14 @@ class CurlDownloader implements DownloaderInterface
         if(!function_exists('curl_init'))
             throw new CannotDownloadFromUrlException('Curl extension not installed', $url);
 
-        try
-        {
+        try {
             $fp = fopen($destination, 'w');
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_FILE, $fp);
             curl_exec($ch);
             curl_close($ch);
             fclose($fp);
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new CannotDownloadFromUrlException(sprintf('Cannot downoad from url "%s": %s', $url, $e->getMessage()), $url, 0, $e);
         }
     }

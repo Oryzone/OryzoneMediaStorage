@@ -40,9 +40,9 @@ interface MediaStorageInterface
     /**
      * Get the url of a media file (if any)
      *
-     * @param  Model\MediaInterface $media
-     * @param  string|null      $variant
-     * @param  array            $options
+     * @param Model\MediaInterface $media
+     * @param string|null          $variant
+     * @param array                $options
      *
      * @return string
      */
@@ -51,9 +51,9 @@ interface MediaStorageInterface
     /**
      * Renders a given media
      *
-     * @param Model\MediaInterface $media
-     * @param null $variant
-     * @param array $options
+     * @param  Model\MediaInterface $media
+     * @param  null                 $variant
+     * @param  array                $options
      * @return mixed
      */
     public function render(MediaInterface $media, $variant = NULL, $options = array());

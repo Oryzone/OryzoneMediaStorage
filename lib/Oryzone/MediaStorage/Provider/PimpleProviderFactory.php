@@ -32,7 +32,7 @@ class PimpleProviderFactory implements ProviderFactoryInterface
      * Constructor
      *
      * @param \Pimple $container
-     * @param string $namespace
+     * @param string  $namespace
      */
     public function __construct(Pimple $container, $namespace = 'mediastorage_provider_')
     {
@@ -43,7 +43,7 @@ class PimpleProviderFactory implements ProviderFactoryInterface
     /**
      * Adds a definition
      *
-     * @param string $name
+     * @param string   $name
      * @param callable $definition
      */
     public function addDefinition($name, \Closure $definition)
@@ -58,12 +58,9 @@ class PimpleProviderFactory implements ProviderFactoryInterface
     public function get($providerName, $providerOptions = array())
     {
         $providerName = $this->namespace . $providerName;
-        try
-        {
+        try {
             $provider = $this->container[$providerName];
-        }
-        catch(\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException(sprintf('The provider "%s" has not been defined', $providerName), $e->getCode(), $e);
         }
 
@@ -71,6 +68,7 @@ class PimpleProviderFactory implements ProviderFactoryInterface
             throw new InvalidConfigurationException(sprintf('The service "%s" in the container is not an instance of "Oryzone\MediaStorage\Provider\ProviderInterface"', $providerName));
 
         $provider->setOptions($providerOptions);
+
         return $provider;
     }
 

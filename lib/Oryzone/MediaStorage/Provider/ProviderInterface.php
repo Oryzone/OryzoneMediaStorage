@@ -48,11 +48,10 @@ interface ProviderInterface
      */
     public function getContentType();
 
-
     /**
      * Sets an array of options for the provider
      *
-     * @param array $options
+     * @param  array $options
      * @return void
      */
     public function setOptions($options);
@@ -79,8 +78,8 @@ interface ProviderInterface
      * Executed each time a media is about to be saved, before the process method
      * Generally used to set metadata
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface      $media
-     * @param \Oryzone\MediaStorage\Context\ContextInterface  $context
+     * @param \Oryzone\MediaStorage\Model\MediaInterface     $media
+     * @param \Oryzone\MediaStorage\Context\ContextInterface $context
      *
      * @return mixed
      */
@@ -113,8 +112,8 @@ interface ProviderInterface
     /**
      * Builds a form to handle the media
      *
-     * @param \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param array $options
+     * @param  \Symfony\Component\Form\FormBuilderInterface $formBuilder
+     * @param  array                                        $options
      * @return mixed
      */
     //public function buildMediaType(FormBuilderInterface $formBuilder, array $options = array());
@@ -122,7 +121,7 @@ interface ProviderInterface
     /**
      * Transforms a media (from a form)
      *
-     * @param \Oryzone\MediaStorage\Model\Media $media
+     * @param  \Oryzone\MediaStorage\Model\Media $media
      * @return mixed
      */
     //public function transform(Media $media);

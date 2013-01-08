@@ -18,7 +18,7 @@ interface ProviderFactoryInterface
      * Gets a provider and sets options
      *
      * @param string $providerName
-     * @param array $providerOptions
+     * @param array  $providerOptions
      *
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      *

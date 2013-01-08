@@ -138,8 +138,7 @@ class VariantTest extends \PHPUnit_Framework_TestCase
             'meta' => array('a' => 'b', 'c' => 'd')
         );
 
-        foreach($data as $name => $value)
-        {
+        foreach ($data as $name => $value) {
             $setter = 'set'.ucwords($name);
             $this->object->$setter($value);
         }
@@ -160,8 +159,7 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         );
         $variant = Variant::fromArray($data);
 
-        foreach($data as $name => $value)
-        {
+        foreach ($data as $name => $value) {
             $getter = 'get'.ucwords($name);
             $this->assertEquals($value, $variant->$getter());
         }

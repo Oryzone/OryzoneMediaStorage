@@ -53,9 +53,10 @@ class ImageProviderTest extends \PHPUnit_Framework_TestCase
         $image->expects($this->any())
               ->method('save')
               ->will($this->returnCallback(
-                function($destFile) use($dir){
+                function($destFile) use ($dir) {
                     $temp = vfsStream::newFile(basename($destFile));
                     $dir->addChild($temp);
+
                     return TRUE;
                 }));
         $imagine = $this->getMock('\Imagine\Image\ImagineInterface');
@@ -119,7 +120,6 @@ class ImageProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->provider->validateContent($imagePath));
         $this->assertTrue($this->provider->validateContent(new \SplFileInfo($imagePath)));
     }
-
 
     public function testProcess()
     {

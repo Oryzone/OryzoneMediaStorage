@@ -41,7 +41,6 @@ class LocalCdnTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-
     public function testSetConfiguration()
     {
         $this->cdn->setConfiguration(array('path' => 'test'));

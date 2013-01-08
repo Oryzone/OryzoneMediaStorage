@@ -48,8 +48,8 @@ class VariantTree implements \IteratorAggregate
     /**
      * Adds a variant (automatically creates a node with a given variant and adds it to the tree)
      *
-     * @param  VariantInterface $content
-     * @param  string|null      $parentName
+     * @param  VariantInterface                                         $content
+     * @param  string|null                                              $parentName
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException if new node contains a variant with no name or
      * an already declared name
      * @return VariantNode
@@ -118,9 +118,9 @@ class VariantTree implements \IteratorAggregate
     /**
      * Performs recursive visit from a node
      *
-     * @param VariantNode $node
-     * @param callable $function
-     * @param int $level
+     * @param  VariantNode $node
+     * @param  callable    $function
+     * @param  int         $level
      * @return void
      */
     protected function visit_recursive(VariantNode $node, \Closure $function = NULL, $level = 0)

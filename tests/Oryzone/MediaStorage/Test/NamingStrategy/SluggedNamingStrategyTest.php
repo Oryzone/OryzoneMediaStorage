@@ -39,7 +39,6 @@ class SluggedNamingStrategyTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-
     public function testGenerateName()
     {
         $media = $this->getMock('\Oryzone\MediaStorage\Model\MediaInterface');

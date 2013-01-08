@@ -94,7 +94,6 @@ Join Angry Birds on G+ at http://plus.google.com/+AngryBirds
         'thumbnail' => 'http://img.youtube.com/vi/something/0.jpg'
     );
 
-
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.

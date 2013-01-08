@@ -18,7 +18,7 @@ interface PersistenceAdapterInterface
     /**
      * Persists the media instance
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface           $media
      * @throws \Oryzone\MediaStorage\Exception\PersistenceException if cannot save the media
      * @return void
      */
@@ -27,7 +27,7 @@ interface PersistenceAdapterInterface
     /**
      * Updates a previously persistend media instance
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface           $media
      * @throws \Oryzone\MediaStorage\Exception\PersistenceException if cannot update the media
      * @return void
      */
@@ -36,7 +36,7 @@ interface PersistenceAdapterInterface
     /**
      * Removes a previously persisted media instance
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface           $media
      * @throws \Oryzone\MediaStorage\Exception\PersistenceException if cannot remove the media
      * @return void
      */

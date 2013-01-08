@@ -32,7 +32,7 @@ class PimpleNamingStrategyFactory implements NamingStrategyFactoryInterface
      * Constructor
      *
      * @param \Pimple $container
-     * @param string $namespace
+     * @param string  $namespace
      */
     public function __construct(Pimple $container, $namespace = 'mediastorage_namingstrategy_')
     {
@@ -42,7 +42,7 @@ class PimpleNamingStrategyFactory implements NamingStrategyFactoryInterface
 
     /**
      * Adds a definition to the container
-     * @param string $name
+     * @param string   $name
      * @param callable $definition
      */
     public function addDefinition($name, \Closure $definition)
@@ -57,12 +57,9 @@ class PimpleNamingStrategyFactory implements NamingStrategyFactoryInterface
     public function get($namingStrategyName)
     {
         $namingStrategyName = $this->namespace . $namingStrategyName;
-        try
-        {
+        try {
             $namingStrategy = $this->container[$namingStrategyName];
-        }
-        catch(\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException(sprintf('The namingStrategy "%s" has not been defined', $namingStrategyName), $e->getCode(), $e);
         }
 

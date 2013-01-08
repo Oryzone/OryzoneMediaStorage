@@ -93,13 +93,13 @@ class VimeoVideoService extends VideoService
     protected function loadMetaValue($name, $default = NULL)
     {
         if(!in_array($name, self::$AVAILABLE_METADATA))
+
             return $default;
 
         $query = sprintf(self::XPATH_SCHEME, $name);
         $elements = $this->xpath->query($query);
 
-        switch($name)
-        {
+        switch ($name) {
             case 'description':
                 if (!is_null($elements) && $elements->length > 0)
                     return strip_tags($elements->item(0)->nodeValue);
@@ -107,6 +107,7 @@ class VimeoVideoService extends VideoService
 
             case 'tags':
                 if(!is_null($elements) && $elements->length > 0)
+
                     return explode(", ", $elements->item(0)->nodeValue);
                 break;
 

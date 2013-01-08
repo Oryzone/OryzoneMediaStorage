@@ -59,10 +59,10 @@ abstract class VideoServiceProvider extends ImageProvider
     /**
      * Constructor
      *
-     * @param string $tempDir
-     * @param \Imagine\Image\ImagineInterface $imagine
+     * @param string                                                        $tempDir
+     * @param \Imagine\Image\ImagineInterface                               $imagine
      * @param \Oryzone\MediaStorage\Integration\Video\VideoServiceInterface $service
-     * @param \Oryzone\MediaStorage\Downloader\DownloaderInterface $downloader
+     * @param \Oryzone\MediaStorage\Downloader\DownloaderInterface          $downloader
      */
     public function __construct($tempDir, ImagineInterface $imagine, VideoServiceInterface $service, DownloaderInterface $downloader = NULL)
     {
@@ -115,18 +115,15 @@ abstract class VideoServiceProvider extends ImageProvider
      *
      * @param $url
      * @param $destination
-     * @param MediaInterface $media
+     * @param  MediaInterface                                           $media
      * @throws \Oryzone\MediaStorage\Exception\ProviderPrepareException
      * @return void
      */
     protected function downloadFile($url, $destination, MediaInterface $media = NULL)
     {
-        try
-        {
+        try {
             $this->downloader->download($url, $destination);
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             throw new ProviderPrepareException($e->getMessage(), $this, $media,0, $e);
         }
     }

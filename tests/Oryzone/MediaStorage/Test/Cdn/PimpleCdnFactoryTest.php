@@ -44,7 +44,7 @@ class PimpleCdnFactoryTest extends \PHPUnit_Framework_TestCase
     public function testAddDefinitionAndGet()
     {
         $mockCdn = $this->getMock('\Oryzone\MediaStorage\Cdn\CdnInterface');
-        $this->factory->addDefinition('cdn_foo', function($c) use ($mockCdn){
+        $this->factory->addDefinition('cdn_foo', function($c) use ($mockCdn) {
             return $mockCdn;
         });
         $this->assertEquals($mockCdn, $this->factory->get('cdn_foo'));

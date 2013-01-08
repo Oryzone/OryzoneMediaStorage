@@ -45,6 +45,7 @@ class ContextFactory implements ContextFactoryInterface
     public function get($contextName)
     {
         if(isset($this->instances[$contextName]))
+
             return $this->instances[$contextName];
 
         if(!array_key_exists($contextName, $this->map))

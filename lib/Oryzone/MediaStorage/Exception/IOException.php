@@ -23,9 +23,9 @@ class IOException extends MediaStorageException
      * Constructor
      *
      * @param string $message
-     * @param mixed $source
-     * @param int $code
-     * @param null $previous
+     * @param mixed  $source
+     * @param int    $code
+     * @param null   $previous
      */
     public function __construct($message = "", $source = NULL, $code = 0, $previous = NULL)
     {

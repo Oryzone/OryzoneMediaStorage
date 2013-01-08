@@ -73,7 +73,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $this->media->getMetaValue('foo'));
     }
 
-
     public function testSetGetModifiedAt()
     {
         $now = new \DateTime();
@@ -86,7 +85,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $this->media->setName('name');
         $this->assertEquals('name', $this->media->getName());
     }
-
 
     public function testHasAddRemoveVariant()
     {
@@ -106,7 +104,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->media->hasVariant('default'));
     }
-
 
     public function testSetGetVariants()
     {
@@ -132,7 +129,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($variants, $this->media->getVariants());
     }
 
-
     public function testGetVariantInstance()
     {
         $variants = array(
@@ -150,7 +146,6 @@ class MediaTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( ($variant instanceof VariantInterface) );
         $this->assertEquals('default', $variant->getName());
     }
-
 
     public function test__toString()
     {

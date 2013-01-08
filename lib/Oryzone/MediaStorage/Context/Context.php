@@ -166,6 +166,7 @@ class Context implements ContextInterface
     public function buildVariantTree()
     {
         if($this->lastTree)
+
             return $this->lastTree;
 
         $tree = new VariantTree();

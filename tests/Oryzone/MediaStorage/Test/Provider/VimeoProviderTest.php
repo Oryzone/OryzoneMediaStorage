@@ -82,9 +82,10 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $image->expects($this->any())
             ->method('save')
             ->will($this->returnCallback(
-            function($destFile) use($dir){
+            function($destFile) use ($dir) {
                 $temp = vfsStream::newFile(basename($destFile));
                 $dir->addChild($temp);
+
                 return true;
             }));
         $imagine = $this->getMock('\Imagine\Image\ImagineInterface');
@@ -96,10 +97,11 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $downloader->expects($this->any())
             ->method('download')
             ->will($this->returnCallback(
-            function($url, $destination) use ($dir){
+            function($url, $destination) use ($dir) {
                 $temp = vfsStream::newFile(basename($destination));
                 $temp->setContent(file_get_contents(__DIR__.'/../fixtures/images/sample.jpg'));
                 $dir->addChild($temp);
+
                 return true;
             }));
 
@@ -121,14 +123,12 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('vimeo', $this->provider->getName());
     }
 
-
     public function testPrepare()
     {
         $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
         $this->provider->setOptions(array('metadata' => 'title'));
         $this->provider->prepare($this->media, $context);
     }
-
 
     public function testRender()
     {

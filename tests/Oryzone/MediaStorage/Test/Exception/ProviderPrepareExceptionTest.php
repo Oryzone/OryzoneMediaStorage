@@ -45,7 +45,6 @@ class ProviderPrepareExceptionTest extends \PHPUnit_Framework_TestCase
     {
     }
 
-
     public function testGetMedia()
     {
         $this->assertEquals($this->media, $this->exception->getMedia());

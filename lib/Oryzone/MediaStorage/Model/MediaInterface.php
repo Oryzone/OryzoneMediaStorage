@@ -27,7 +27,7 @@ interface MediaInterface
     /**
      * Set content
      *
-     * @param mixed $content
+     * @param  mixed $content
      * @return void
      */
     public function setContent($content);
@@ -49,7 +49,7 @@ interface MediaInterface
     /**
      * Set the context
      *
-     * @param \Oryzone\MediaStorage\Context\ContextInterface $context
+     * @param  \Oryzone\MediaStorage\Context\ContextInterface $context
      * @return void
      */
     public function setContext(ContextInterface $context);
@@ -71,8 +71,8 @@ interface MediaInterface
     /**
      * Set a metadata value for a given key
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return void
      */
     public function setMetaValue($key, $value);

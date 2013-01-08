@@ -111,7 +111,7 @@ class VariantTreeTest extends \PHPUnit_Framework_TestCase
         );
 
         $visitedNodes = array();
-        $this->tree->visit(function(VariantNode $node, $level) use (&$visitedNodes){
+        $this->tree->visit(function(VariantNode $node, $level) use (&$visitedNodes) {
             $visitedNodes[$node->getContent()->getName()] = $level;
         });
 

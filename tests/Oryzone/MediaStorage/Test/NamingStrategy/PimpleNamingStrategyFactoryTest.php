@@ -44,7 +44,7 @@ class PimpleNamingStrategyFactoryTest extends \PHPUnit_Framework_TestCase
     public function testAddDefinitionAndGet()
     {
         $namingStrategy = $this->getMock('\Oryzone\MediaStorage\NamingStrategy\NamingStrategyInterface');
-        $this->factory->addDefinition('default', function($c) use ($namingStrategy){
+        $this->factory->addDefinition('default', function($c) use ($namingStrategy) {
            return $namingStrategy;
         });
         $this->assertSame($namingStrategy, $this->factory->get('default'));

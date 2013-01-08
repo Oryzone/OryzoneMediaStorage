@@ -82,25 +82,25 @@ class YoutubeVideoService extends VideoService
      */
     protected function loadMetaValue($name, $default = NULL)
     {
-        switch($name)
-        {
+        switch ($name) {
             case 'thumbnail':
                 return sprintf(self::PREVIEW_IMAGE_URL, $this->lastId);
                 break;
 
             case 'tags':
                 $elements = $this->xpath->query(self::$XPATHS[$name]);
-                if(!is_null($elements) && $elements->length > 0)
-                {
+                if (!is_null($elements) && $elements->length > 0) {
                     $tags = array();
                     foreach($elements as $element)
                         $tags[] = $element->nodeValue;
+
                     return $tags;
                 }
                 break;
 
             default:
                 if(!isset(self::$XPATHS[$name]))
+
                     return $default;
 
                 $elements = $this->xpath->query(self::$XPATHS[$name]);

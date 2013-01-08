@@ -66,7 +66,7 @@ class ImageProvider extends FileProvider
     /**
      * Constructor
      *
-     * @param string $tempDir
+     * @param string                          $tempDir
      * @param \Imagine\Image\ImagineInterface $imagine
      */
     public function __construct($tempDir, \Imagine\Image\ImagineInterface $imagine = NULL)
@@ -88,19 +88,17 @@ class ImageProvider extends FileProvider
     /**
      * Verifies if the temp directory exists and it tries to generate it otherwise
      *
-     * @param string $tempDir
+     * @param  string                                                   $tempDir
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      */
     protected function checkTempDir($tempDir)
     {
-        if(!is_dir($tempDir))
-        {
+        if (!is_dir($tempDir)) {
             if(file_exists($tempDir))
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate temp folder "%s" for the ImageProvider. A file with the same path already exists', $tempDir));
 
-            if (true !== @mkdir($tempDir, '0777', true))
-            {
+            if (true !== @mkdir($tempDir, '0777', true)) {
                 throw new InvalidArgumentException(
                     sprintf('Unable to create temp folder "%s" for the ImageProvider', $tempDir));
             }
@@ -110,9 +108,9 @@ class ImageProvider extends FileProvider
     /**
      * Process options array by validating it and merging with default values
      *
-     * @param array $options
-     * @param string $variantName
-     * @param string $contextName
+     * @param  array                                                    $options
+     * @param  string                                                   $variantName
+     * @param  string                                                   $contextName
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      *
      * @return array
@@ -121,8 +119,7 @@ class ImageProvider extends FileProvider
     {
         // validates options for unsupported keys
         $allowedKeys = array_keys(self::$DEFAULT_OPTIONS);
-        foreach($options as $key => $value)
-        {
+        foreach ($options as $key => $value) {
             if(!in_array($key, $allowedKeys))
                 throw new InvalidArgumentException(
                     sprintf('Unsupported option "%s" for variant "%s" in context "%s". Allowed values are: %s',
@@ -193,8 +190,7 @@ class ImageProvider extends FileProvider
                 ($originalWidth >= $width && $originalHeight >= $height)
             )
             {
-                if( $options['resize'] == 'proportional' )
-                {
+                if ($options['resize'] == 'proportional') {
                     //calculate missing dimension
                     if($width === NULL)
                         $width = round( $originalWidth * $height / $originalHeight );

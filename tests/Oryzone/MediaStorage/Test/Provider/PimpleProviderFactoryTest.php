@@ -43,7 +43,7 @@ class PimpleProviderFactoryTest extends \PHPUnit_Framework_TestCase
     public function testAddDefinitionAndGet()
     {
         $provider = $this->getMock('\Oryzone\MediaStorage\Provider\ProviderInterface');
-        $this->factory->addDefinition('default', function($c) use ($provider){
+        $this->factory->addDefinition('default', function($c) use ($provider) {
             return $provider;
         });
         $this->assertSame($provider, $this->factory->get('default'));

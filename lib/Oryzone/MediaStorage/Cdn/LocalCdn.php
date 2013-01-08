@@ -40,8 +40,7 @@ class LocalCdn implements CdnInterface
     {
         $url = $this->path . $variant->getFilename();
 
-        if(isset($options['absolute']) && $options['absolute'])
-        {
+        if (isset($options['absolute']) && $options['absolute']) {
             if(isset($options['domain']))
                 $domain = $options['domain'];
             else

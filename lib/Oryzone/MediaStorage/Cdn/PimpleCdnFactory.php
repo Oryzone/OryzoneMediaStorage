@@ -12,7 +12,6 @@
 namespace Oryzone\MediaStorage\Cdn;
 
 use Pimple;
-use Closure;
 
 use Oryzone\MediaStorage\Exception\InvalidArgumentException,
     Oryzone\MediaStorage\Exception\InvalidConfigurationException;
@@ -38,7 +37,7 @@ class PimpleCdnFactory implements CdnFactoryInterface
      * Constructor
      *
      * @param \Pimple $container
-     * @param string $namespace
+     * @param string  $namespace
      */
     public function __construct(Pimple $container, $namespace = 'mediastorage_cdn_')
     {
@@ -50,7 +49,7 @@ class PimpleCdnFactory implements CdnFactoryInterface
     /**
      * @param $name
      * @param \Closure $definition
-     * @param array $config
+     * @param array    $config
      */
     public function addDefinition($name, \Closure $definition, $config = array())
     {
@@ -65,12 +64,9 @@ class PimpleCdnFactory implements CdnFactoryInterface
     public function get($cdnName)
     {
         $cdnName = $this->namespace . $cdnName;
-        try
-        {
+        try {
             $cdn = $this->container[$cdnName];
-        }
-        catch(\InvalidArgumentException $e)
-        {
+        } catch (\InvalidArgumentException $e) {
             throw new InvalidArgumentException(sprintf('The cdn "%s" has not been defined', $cdnName), $e->getCode(), $e);
         }
 
@@ -78,6 +74,7 @@ class PimpleCdnFactory implements CdnFactoryInterface
             throw new InvalidConfigurationException(sprintf('The service "%s" in the container is not an instance of "Oryzone\MediaStorage\Cdn\CdnInterface"', $cdnName));
 
         $cdn->setConfiguration($this->config[$cdnName]);
+
         return $cdn;
     }
 }

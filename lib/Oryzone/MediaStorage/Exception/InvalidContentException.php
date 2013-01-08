@@ -30,11 +30,11 @@ class InvalidContentException extends MediaStorageException
     /**
      * Constructor
      *
-     * @param string $message
+     * @param string                                           $message
      * @param \Oryzone\MediaStorage\Provider\ProviderInterface $provider
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
-     * @param int $code
-     * @param \Exception $previous
+     * @param \Oryzone\MediaStorage\Model\MediaInterface       $media
+     * @param int                                              $code
+     * @param \Exception                                       $previous
      */
     public function __construct($message = "", ProviderInterface $provider = NULL, MediaInterface $media = NULL, $code = 0, \Exception $previous = null)
     {

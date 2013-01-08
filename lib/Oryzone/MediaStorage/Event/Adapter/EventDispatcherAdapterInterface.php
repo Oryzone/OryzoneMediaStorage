@@ -18,7 +18,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before a media file starts being processed
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onBeforeProcess(MediaInterface $media);
@@ -26,7 +26,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after a media file ended processing
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onAfterProcess(MediaInterface $media);
@@ -34,7 +34,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before a media is stored
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onBeforeStore(MediaInterface $media);
@@ -42,7 +42,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after a media is stored
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onAfterStore(MediaInterface $media);
@@ -50,7 +50,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before a media is updated
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onBeforeUpdate(MediaInterface $media);
@@ -58,7 +58,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after a media is updated
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onAfterUpdate(MediaInterface $media);
@@ -66,7 +66,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before a media is removed
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onBeforeRemove(MediaInterface $media);
@@ -74,7 +74,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after a media is removed
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onAfterRemove(MediaInterface $media);
@@ -82,8 +82,8 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before the model is persisted
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
-     * @param bool $update
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  bool                                       $update
      * @return void
      */
     public function onBeforeModelPersist(MediaInterface $media, $update = FALSE);
@@ -91,8 +91,8 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after the model is persisted
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
-     * @param bool $update
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  bool                                       $update
      * @return void
      */
     public function onAfterModelPersist(MediaInterface $media, $update = FALSE);
@@ -100,7 +100,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called before the model is removed
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onBeforeModelRemove(MediaInterface $media);
@@ -108,7 +108,7 @@ interface EventDispatcherAdapterInterface
     /**
      * Called after the model is removed
      *
-     * @param \Oryzone\MediaStorage\Model\MediaInterface $media
+     * @param  \Oryzone\MediaStorage\Model\MediaInterface $media
      * @return void
      */
     public function onAfterModelRemove(MediaInterface $media);

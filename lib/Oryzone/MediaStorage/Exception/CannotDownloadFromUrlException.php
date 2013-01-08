@@ -21,9 +21,9 @@ class CannotDownloadFromUrlException extends MediaStorageException
     /**
      * Constructor
      *
-     * @param string $message
-     * @param string $url
-     * @param int $code
+     * @param string     $message
+     * @param string     $url
+     * @param int        $code
      * @param \Exception $previous
      */
     public function __construct($message = '', $url = '', $code = 0, \Exception $previous = null)

@@ -39,6 +39,7 @@ class FileProvider extends Provider
     public function hasChangedContent(MediaInterface $media)
     {
         $content = $media->getContent();
+
         return ($content != NULL && $media->getMetaValue('id') !== md5_file($content));
     }
 
@@ -67,6 +68,7 @@ class FileProvider extends Provider
     public function process(MediaInterface $media, VariantInterface $variant, \SplFileInfo $source = NULL)
     {
         $variant->setMetaValue('size', $source->getSize());
+
         return $source;
     }
 

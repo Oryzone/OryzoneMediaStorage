@@ -136,6 +136,7 @@ class Variant implements VariantInterface
     public function getMetaValue($key, $default = NULL)
     {
         if(isset($this->meta[$key]))
+
             return $this->meta[$key];
 
         return $default;

@@ -17,10 +17,10 @@ interface DownloaderInterface
     /**
      * Downloads a file from an url and saves it to a given destination
      *
-     * @param string $url
-     * @param string $destination
+     * @param  string                                                         $url
+     * @param  string                                                         $destination
      * @throws \Oryzone\MediaStorage\Exception\CannotDownloadFromUrlException if cannot download the resource
-     * @throws \Oryzone\MediaStorage\Exception\IOException if cannot save to destination
+     * @throws \Oryzone\MediaStorage\Exception\IOException                    if cannot save to destination
      */
     public function download($url, $destination);
 

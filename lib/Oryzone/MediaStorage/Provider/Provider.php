@@ -78,7 +78,6 @@ abstract class Provider implements ProviderInterface
         return ($media->getContent() !== NULL);
     }
 
-
     /**
      * Adds a file to the list of temp files generated
      *
@@ -121,7 +120,7 @@ abstract class Provider implements ProviderInterface
     /*
      * Transforms a media (from a form)
      *
-     * @param \Oryzone\MediaStorage\Model\Media $media
+     * @param  \Oryzone\MediaStorage\Model\Media $media
      * @return mixed
 
     public function transform(Media $media)

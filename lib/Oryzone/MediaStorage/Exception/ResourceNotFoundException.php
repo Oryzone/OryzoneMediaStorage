@@ -22,9 +22,9 @@ class ResourceNotFoundException extends MediaStorageException
     protected $id;
 
     /**
-     * @param string $message {@inheritDoc}
-     * @param string $id A unique identifier for the resource
-     * @param int $code {@inheritDoc}
+     * @param string     $message  {@inheritDoc}
+     * @param string     $id       A unique identifier for the resource
+     * @param int        $code     {@inheritDoc}
      * @param \Exception $previous {@inheritDoc}
      */
     public function __construct($message = "", $id = NULL, $code = 0, \Exception $previous = null)

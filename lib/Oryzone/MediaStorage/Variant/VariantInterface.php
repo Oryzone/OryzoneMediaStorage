@@ -92,7 +92,7 @@ interface VariantInterface
     /**
      * Sets the whole array of metadata for the variant
      *
-     * @param array $meta
+     * @param  array $meta
      * @return mixed
      */
     public function setMeta($meta);
@@ -107,8 +107,8 @@ interface VariantInterface
     /**
      * Set a value for a specific metadata
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  string $key
+     * @param  mixed  $value
      * @return mixed
      */
     public function setMetaValue($key, $value);
@@ -116,8 +116,8 @@ interface VariantInterface
     /**
      * Get
      *
-     * @param string $key
-     * @param mixed|null $default a default value in case the given key is not present
+     * @param  string     $key
+     * @param  mixed|null $default a default value in case the given key is not present
      * @return mixed
      */
     public function getMetaValue($key, $default = NULL);

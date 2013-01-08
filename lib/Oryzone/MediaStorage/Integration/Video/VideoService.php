@@ -62,7 +62,7 @@ abstract class VideoService implements VideoServiceInterface
     /**
      * Constructor
      *
-     * @param \Buzz\Browser $buzz
+     * @param \Buzz\Browser                $buzz
      * @param \Doctrine\Common\Cache\Cache $cache
      */
     public function __construct(Browser $buzz, Cache $cache = NULL)
@@ -74,7 +74,7 @@ abstract class VideoService implements VideoServiceInterface
     /**
      * Gets the cache key for a given id
      *
-     * @param string $id
+     * @param  string $id
      * @return string
      */
     abstract protected function getCacheKey($id);
@@ -90,7 +90,7 @@ abstract class VideoService implements VideoServiceInterface
      * Method that implements the logic to extract a given metadata from the raw response
      *
      * @param $name
-     * @param null $default
+     * @param  null  $default
      * @return mixed
      */
     abstract protected function loadMetaValue($name, $default = NULL);
@@ -98,8 +98,8 @@ abstract class VideoService implements VideoServiceInterface
     /**
      * Implements the logic to issue the request to the service
      *
-     * @param string $id
-     * @param array $options
+     * @param  string $id
+     * @param  array  $options
      * @return string
      */
     abstract protected function getResponse($id, $options = array());
@@ -122,17 +122,14 @@ abstract class VideoService implements VideoServiceInterface
 
         $this->metadata = array();
 
-        if($this->cache !== NULL && $options['cache'])
-        {
+        if ($this->cache !== NULL && $options['cache']) {
             if($this->cache->contains($cacheKey))
                 $this->response = $this->cache->fetch($cacheKey);
-            else
-            {
+            else {
                 $this->response = $this->getResponse($id, $options);
                 $this->cache->save($cacheKey, $this->response, $options['cacheLifetime']);
             }
-        }
-        else
+        } else
             $this->response = $this->getResponse($id, $options);
 
         $this->afterLoad();
@@ -157,9 +154,11 @@ abstract class VideoService implements VideoServiceInterface
     {
         // Each metadata value is lazy loaded and memory cached
         if(isset($this->metadata[$name]))
+
             return $this->metadata[$name];
 
         $this->metadata[$name] = $this->loadMetaValue($name, $default);
+
         return $this->metadata[$name];
     }
 

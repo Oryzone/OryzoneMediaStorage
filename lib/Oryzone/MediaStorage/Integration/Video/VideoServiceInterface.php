@@ -17,8 +17,8 @@ interface VideoServiceInterface
     /**
      * Issues a request to the service api to load information about a video
      *
-     * @param string $id a unique identificative string for the video (generally the video id or the video url)
-     * @param array $options an optional array of options
+     * @param  string                                                    $id      a unique identificative string for the video (generally the video id or the video url)
+     * @param  array                                                     $options an optional array of options
      * @throws \Oryzone\MediaStorage\Exception\ResourceNotFoundException if cannot find the resource
      * (generally due to incorrect id)
      *
@@ -36,8 +36,8 @@ interface VideoServiceInterface
     /**
      * Gets a single metadata value for a given metadata key
      *
-     * @param string $name the key of the metadata to retrieve
-     * @param mixed $default a value to use as default response if the given key is not present in the metadata
+     * @param  string $name    the key of the metadata to retrieve
+     * @param  mixed  $default a value to use as default response if the given key is not present in the metadata
      * @return mixed
      */
     public function getMetaValue($name, $default = NULL);
