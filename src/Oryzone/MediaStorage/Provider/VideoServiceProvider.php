@@ -18,7 +18,8 @@ use Imagine\Image\ImagineInterface;
 
 use Oryzone\MediaStorage\Exception\ProviderPrepareException,
     Oryzone\MediaStorage\Model\MediaInterface,
-    Oryzone\MediaStorage\Integration\Video\VideoServiceInterface;
+    Oryzone\MediaStorage\Integration\Video\VideoServiceInterface,
+    Oryzone\MediaStorage\Downloader\DownloaderInterface;
 
 abstract class VideoServiceProvider extends ImageProvider
 {
@@ -48,16 +49,25 @@ abstract class VideoServiceProvider extends ImageProvider
     protected $service;
 
     /**
+     * The service used to download files
+     *
+     * @var \Oryzone\MediaStorage\Downloader\DownloaderInterface $downloader
+     */
+    protected $downloader;
+
+    /**
      * Constructor
      *
      * @param string $tempDir
      * @param \Imagine\Image\ImagineInterface $imagine
      * @param \Oryzone\MediaStorage\Integration\Video\VideoServiceInterface $service
+     * @param \Oryzone\MediaStorage\Downloader\DownloaderInterface $downloader
      */
-    public function __construct($tempDir, ImagineInterface $imagine, VideoServiceInterface $service)
+    public function __construct($tempDir, ImagineInterface $imagine, VideoServiceInterface $service, DownloaderInterface $downloader)
     {
         parent::__construct($tempDir, $imagine);
         $this->service = $service;
+        $this->downloader = $downloader;
     }
 
     /**
@@ -108,16 +118,11 @@ abstract class VideoServiceProvider extends ImageProvider
     {
         try
         {
-            $fp = fopen($destination, 'w');
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_FILE, $fp);
-            curl_exec($ch);
-            curl_close($ch);
-            fclose($fp);
+            $this->downloader->download($url, $destination);
         }
         catch(\Exception $e)
         {
-            throw new ProviderPrepareException(sprintf('Cannot downoad file "%s": $s', $url, $e->getMessage()), $this, $media);
+            throw new ProviderPrepareException($e->getMessage(), $this, $media,0, $e);
         }
     }
 
