@@ -48,13 +48,14 @@ class ImageProviderTest extends \PHPUnit_Framework_TestCase
         $this->dir = vfsStream::setup();
         vfsStream::copyFromFileSystem(__DIR__.'/../fixtures/images', $this->dir);
 
+        $dir = $this->dir;
         $image = $this->getMock('\Imagine\Image\ImageInterface');
         $image->expects($this->any())
               ->method('save')
               ->will($this->returnCallback(
-                function($destFile){
+                function($destFile) use($dir){
                     $temp = vfsStream::newFile(basename($destFile));
-                    $this->dir->addChild($temp);
+                    $dir->addChild($temp);
                     return TRUE;
                 }));
         $imagine = $this->getMock('\Imagine\Image\ImagineInterface');
