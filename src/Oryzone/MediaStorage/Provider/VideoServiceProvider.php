@@ -19,7 +19,8 @@ use Imagine\Image\ImagineInterface;
 use Oryzone\MediaStorage\Exception\ProviderPrepareException,
     Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Integration\Video\VideoServiceInterface,
-    Oryzone\MediaStorage\Downloader\DownloaderInterface;
+    Oryzone\MediaStorage\Downloader\DownloaderInterface,
+    Oryzone\MediaStorage\Downloader\CurlDownloader;
 
 abstract class VideoServiceProvider extends ImageProvider
 {
@@ -63,10 +64,14 @@ abstract class VideoServiceProvider extends ImageProvider
      * @param \Oryzone\MediaStorage\Integration\Video\VideoServiceInterface $service
      * @param \Oryzone\MediaStorage\Downloader\DownloaderInterface $downloader
      */
-    public function __construct($tempDir, ImagineInterface $imagine, VideoServiceInterface $service, DownloaderInterface $downloader)
+    public function __construct($tempDir, ImagineInterface $imagine, VideoServiceInterface $service, DownloaderInterface $downloader = NULL)
     {
         parent::__construct($tempDir, $imagine);
         $this->service = $service;
+
+        if($downloader == NULL)
+            $downloader = new CurlDownloader();
+
         $this->downloader = $downloader;
     }
 
