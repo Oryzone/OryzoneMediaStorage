@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oryzone\MediaStorage\Event\Adapter;
+namespace Oryzone\MediaStorage\Event;
 
 use Oryzone\MediaStorage\Model\MediaInterface;
 
