@@ -29,7 +29,9 @@ class ImageProvider extends FileProvider
     protected $imagine;
 
     /**
-     * @var array
+     * supported file types
+     *
+     * @var array $SUPPORTED_TYPES
      */
     protected static $SUPPORTED_TYPES = array(
         'bmp',
@@ -39,7 +41,9 @@ class ImageProvider extends FileProvider
     );
 
     /**
-     * @var array
+     * default options array
+     *
+     * @var array $DEFAULT_OPTIONS
      */
     protected static $DEFAULT_OPTIONS = array(
         'width'         => NULL,
@@ -50,12 +54,13 @@ class ImageProvider extends FileProvider
         'enlarge'       => TRUE
     );
 
+    /**
+     * allowed resize modes
+     *
+     * @var array $ALLOWED_RESIZE_MODES
+     */
     protected static $ALLOWED_RESIZE_MODES = array(
         'stretch', 'proportional', 'crop'
-    );
-
-    protected static $ALLOWED_FORMATS = array(
-        'bmp', 'gif', 'jpg', 'jpeg', 'png'
     );
 
     /**
@@ -130,10 +135,10 @@ class ImageProvider extends FileProvider
                 sprintf('Unsupported value "%s" for key "resize" for variant "%s" in context "%s". Allowed values are: %s',
                     $options['resize'], $variantName, $contextName, json_encode(self::$ALLOWED_RESIZE_MODES)));
 
-        if(!in_array($options['format'], self::$ALLOWED_FORMATS))
+        if(!in_array($options['format'], self::$SUPPORTED_TYPES))
             throw new InvalidArgumentException(
                 sprintf('Unsupported value "%s" for key "format" for variant "%s" in context "%s". Allowed values are: %s',
-                    $options['format'], $variantName, $contextName, json_encode(self::$ALLOWED_FORMATS)));
+                    $options['format'], $variantName, $contextName, json_encode(self::$SUPPORTED_TYPES)));
 
         if(!is_int($options['quality']) || $options['quality'] < 1 || $options['quality'] > 100)
             throw new InvalidArgumentException(
