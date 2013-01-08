@@ -125,7 +125,9 @@ class ImageProviderTest extends \PHPUnit_Framework_TestCase
     {
         $file = new \SplFileInfo(vfsStream::url('root/sample.jpg'));
         $resultFile = $this->provider->process($this->media, $this->variant, $file);
-        $this->assertStringEndsWith('-temp-sample.jpg', $resultFile->getBasename());
+        $filename = $resultFile->getBasename();
+        $this->assertStringEndsWith('-temp-sample.jpg', $filename);
+        $this->assertTrue($this->dir->hasChild($filename));
     }
 
     public function testRender()
