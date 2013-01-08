@@ -14,8 +14,8 @@ namespace Oryzone\MediaStorage;
 use Gaufrette\StreamMode,
     Gaufrette\Stream\Local;
 
-use Oryzone\MediaStorage\Event\Adapter\EventDispatcherAdapterInterface,
-    Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface,
+use Oryzone\MediaStorage\Event\EventDispatcherAdapterInterface,
+    Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface,
     Oryzone\MediaStorage\Cdn\CdnFactoryInterface,
     Oryzone\MediaStorage\Context\ContextFactoryInterface,
     Oryzone\MediaStorage\Filesystem\FilesystemFactoryInterface,
@@ -33,12 +33,12 @@ use Oryzone\MediaStorage\Event\Adapter\EventDispatcherAdapterInterface,
 class MediaStorage implements MediaStorageInterface
 {
     /**
-     * @var Event\Adapter\EventDispatcherAdapterInterface $eventAdapter
+     * @var Event\EventDispatcherAdapterInterface $eventAdapter
      */
     protected $eventDispatcherAdapter;
 
     /**
-     * @var Persistence\Adapter\PersistenceAdapterInterface $persistenceAdapter
+     * @var Persistence\PersistenceAdapterInterface $persistenceAdapter
      */
     protected $persistenceAdapter;
 
@@ -100,11 +100,11 @@ class MediaStorage implements MediaStorageInterface
     /**
      * Constructor
      *
-     * @param Event\Adapter\EventDispatcherAdapterInterface   $eventDispatcherAdapter
-     * @param Persistence\Adapter\PersistenceAdapterInterface $persistenceAdapter
+     * @param Event\EventDispatcherAdapterInterface           $eventDispatcherAdapter
+     * @param Persistence\PersistenceAdapterInterface         $persistenceAdapter
      * @param Cdn\CdnFactoryInterface                         $cdnFactory
      * @param Context\ContextFactoryInterface                 $contextFactory
-     * @param Filesystem\FilesystemFactoryInterface           $filesystemMap
+     * @param Filesystem\FilesystemFactoryInterface           $filesystemFactory
      * @param Provider\ProviderFactoryInterface               $providerFactory
      * @param NamingStrategy\NamingStrategyFactoryInterface   $namingStrategyFactory
      * @param string|null                                     $defaultCdn
@@ -116,7 +116,7 @@ class MediaStorage implements MediaStorageInterface
      */
     public function __construct(EventDispatcherAdapterInterface $eventDispatcherAdapter,
                                 PersistenceAdapterInterface $persistenceAdapter, CdnFactoryInterface $cdnFactory,
-                                ContextFactoryInterface $contextFactory, FilesystemFactoryInterface $filesystemMap,
+                                ContextFactoryInterface $contextFactory, FilesystemFactoryInterface $filesystemFactory,
                                 ProviderFactoryInterface $providerFactory,
                                 NamingStrategyFactoryInterface $namingStrategyFactory, $defaultCdn = NULL,
                                 $defaultContext = NULL, $defaultFilesystem = NULL, $defaultProvider = NULL,
@@ -126,7 +126,7 @@ class MediaStorage implements MediaStorageInterface
         $this->persistenceAdapter = $persistenceAdapter;
         $this->cdnFactory = $cdnFactory;
         $this->contextFactory = $contextFactory;
-        $this->filesystemFactory = $filesystemMap;
+        $this->filesystemFactory = $filesystemFactory;
         $this->providerFactory = $providerFactory;
         $this->namingStrategyFactory = $namingStrategyFactory;
         $this->defaultCdn = $defaultCdn;
