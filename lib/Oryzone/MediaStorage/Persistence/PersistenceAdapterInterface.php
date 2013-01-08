@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Oryzone\MediaStorage\Persistence\Adapter;
+namespace Oryzone\MediaStorage\Persistence;
 
 use Oryzone\MediaStorage\Model\MediaInterface;
 
