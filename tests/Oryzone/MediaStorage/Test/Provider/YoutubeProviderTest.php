@@ -126,7 +126,7 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
     {
         $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
         $this->provider->setOptions(array(
-            'metadata' => array('title')
+            'metadata' => 'title'
         ));
         $this->provider->prepare($this->media, $context);
     }
@@ -134,9 +134,15 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
+        $url = 'http://www.example.com/sample.jpg';
         $options = array('attributes' => array('class' => 'videoPlayer'));
-        $expectedXml = '<iframe src="http://www.youtube.com/embed/" frameborder="0" allowfullscreen class="videoPlayer" ></iframe>';
-        $rendered = $this->provider->render($this->media, $this->variant, NULL, $options);
-        $this->assertEquals($expectedXml, $rendered);
+        $expectedHtml = '<iframe src="http://www.youtube.com/embed/" frameborder="0" allowfullscreen class="videoPlayer" ></iframe>';
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expectedHtml, $rendered);
+
+        $options['mode'] = 'image';
+        $expectedHtml = '<img src="http://www.example.com/sample.jpg" title="sample" class="videoPlayer" />';
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expectedHtml, $rendered);
     }
 }
