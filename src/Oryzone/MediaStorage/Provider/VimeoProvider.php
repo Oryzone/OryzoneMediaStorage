@@ -74,11 +74,14 @@ class VimeoProvider extends VideoServiceProvider
             $media->setContent($previewImageFile);
 
             $media->setMetaValue('id', $id);
-            foreach($this->options['metadata'] as $metaName => $mediaMetaName)
+            if(isset($this->options['metadata']))
             {
-                $value = $this->service->getMetaValue($metaName);
-                if($value !== NULL)
-                    $media->setMetaValue($mediaMetaName, $value);
+                foreach((array)$this->options['metadata'] as $metaName => $mediaMetaName)
+                {
+                    $value = $this->service->getMetaValue($metaName);
+                    if($value !== NULL)
+                        $media->setMetaValue($mediaMetaName, $value);
+                }
             }
         }
     }

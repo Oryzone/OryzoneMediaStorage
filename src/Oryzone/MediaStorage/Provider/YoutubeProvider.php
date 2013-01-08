@@ -80,7 +80,7 @@ class YoutubeProvider extends VideoServiceProvider
 
             if(isset($this->options['metadata']))
             {
-                foreach($this->options['metadata'] as $metaName => $mediaMetaName)
+                foreach((array)$this->options['metadata'] as $metaName => $mediaMetaName)
                 {
                     $value = $this->service->getMetaValue($metaName);
                     if($value !== NULL)
