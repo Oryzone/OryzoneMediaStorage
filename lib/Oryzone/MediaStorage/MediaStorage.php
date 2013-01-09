@@ -367,11 +367,11 @@ class MediaStorage implements MediaStorageInterface
 
         if (!$isUpdate || $isUpdate && $provider->hasChangedContent($media)) {
             if(!$media->getContext())
-                $media->setContext($context->getName());
+                $media->setContextName($context->getName());
 
             if( !$provider->validateContent($media->getContent()) )
                 throw new InvalidContentException(sprintf('Invalid content of type "%s" for media "%s" detected by "%s" provider',
-                        gettype($media->getContent())=='object'?get_class($media->getContent()):gettype($media->getContent()).'('.$media->getContent().')', $media, $provider->getName()),
+                        gettype($media->getContent())=='object'?get_class($media->getContent()):gettype($media->getContent()).'('.$media->getContent().')', $media->__toString(), $provider->getName()),
                     $provider, $media);
 
             $provider->prepare($media, $context);
