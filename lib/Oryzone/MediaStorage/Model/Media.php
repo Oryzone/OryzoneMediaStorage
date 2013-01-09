@@ -98,9 +98,9 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritDoc}
      */
-    public function setContext(ContextInterface $context)
+    public function setContextName($contextName)
     {
-        $this->context = $context;
+        $this->context = $contextName;
     }
 
     /**

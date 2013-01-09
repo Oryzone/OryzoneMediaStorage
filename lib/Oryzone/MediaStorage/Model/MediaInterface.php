@@ -49,10 +49,10 @@ interface MediaInterface
     /**
      * Set the context
      *
-     * @param  \Oryzone\MediaStorage\Context\ContextInterface $context
+     * @param  string $contextName
      * @return void
      */
-    public function setContext(ContextInterface $context);
+    public function setContextName($contextName);
 
     /**
      * Set created at
@@ -147,5 +147,11 @@ interface MediaInterface
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      */
     public function getVariantInstance($variantName);
+
+    /**
+     * Returns a string that describes the media (mostly used for debug and on the descriptive message on exceptions)
+     * @return string
+     */
+    public function __toString();
 
 }

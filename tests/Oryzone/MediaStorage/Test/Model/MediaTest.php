@@ -48,7 +48,7 @@ class MediaTest extends \PHPUnit_Framework_TestCase
     public function testSetGetContext()
     {
         $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
-        $this->media->setContext($context);
+        $this->media->setContextName($context);
         $this->assertSame($context, $this->media->getContext());
     }
 
