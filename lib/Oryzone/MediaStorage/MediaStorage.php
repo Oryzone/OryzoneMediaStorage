@@ -100,19 +100,19 @@ class MediaStorage implements MediaStorageInterface
     /**
      * Constructor
      *
-     * @param Event\EventDispatcherAdapterInterface           $eventDispatcherAdapter
-     * @param Persistence\PersistenceAdapterInterface         $persistenceAdapter
-     * @param Cdn\CdnFactoryInterface                         $cdnFactory
-     * @param Context\ContextFactoryInterface                 $contextFactory
-     * @param Filesystem\FilesystemFactoryInterface           $filesystemFactory
-     * @param Provider\ProviderFactoryInterface               $providerFactory
-     * @param NamingStrategy\NamingStrategyFactoryInterface   $namingStrategyFactory
-     * @param string|null                                     $defaultCdn
-     * @param string|null                                     $defaultContext
-     * @param string|null                                     $defaultFilesystem
-     * @param string|null                                     $defaultProvider
-     * @param string|null                                     $defaultNamingStrategy
-     * @param string|null                                     $defaultVariant
+     * @param Event\EventDispatcherAdapterInterface         $eventDispatcherAdapter
+     * @param Persistence\PersistenceAdapterInterface       $persistenceAdapter
+     * @param Cdn\CdnFactoryInterface                       $cdnFactory
+     * @param Context\ContextFactoryInterface               $contextFactory
+     * @param Filesystem\FilesystemFactoryInterface         $filesystemFactory
+     * @param Provider\ProviderFactoryInterface             $providerFactory
+     * @param NamingStrategy\NamingStrategyFactoryInterface $namingStrategyFactory
+     * @param string|null                                   $defaultCdn
+     * @param string|null                                   $defaultContext
+     * @param string|null                                   $defaultFilesystem
+     * @param string|null                                   $defaultProvider
+     * @param string|null                                   $defaultNamingStrategy
+     * @param string|null                                   $defaultVariant
      */
     public function __construct(EventDispatcherAdapterInterface $eventDispatcherAdapter,
                                 PersistenceAdapterInterface $persistenceAdapter, CdnFactoryInterface $cdnFactory,

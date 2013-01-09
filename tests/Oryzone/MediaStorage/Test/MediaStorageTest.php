@@ -275,8 +275,7 @@ class MediaStorageTest extends \PHPUnit_Framework_TestCase
             'onAfterModelPersist'
         );
 
-        foreach($eventDispatcherExpectedCalls as $method)
-        {
+        foreach ($eventDispatcherExpectedCalls as $method) {
             $this->eventDispatcherAdapter->expects($this->once())
                 ->method($method)
                 ->with($this->equalTo($media));
@@ -327,8 +326,7 @@ class MediaStorageTest extends \PHPUnit_Framework_TestCase
             'onAfterModelPersist'
         );
 
-        foreach($eventDispatcherExpectedCalls as $method)
-        {
+        foreach ($eventDispatcherExpectedCalls as $method) {
             $this->eventDispatcherAdapter->expects($this->once())
                 ->method($method)
                 ->with($this->equalTo($media));
@@ -381,8 +379,7 @@ class MediaStorageTest extends \PHPUnit_Framework_TestCase
             'onAfterModelRemove'
         );
 
-        foreach($eventDispatcherExpectedCalls as $method)
-        {
+        foreach ($eventDispatcherExpectedCalls as $method) {
             $this->eventDispatcherAdapter->expects($this->once())
                 ->method($method)
                 ->with($this->equalTo($media));
