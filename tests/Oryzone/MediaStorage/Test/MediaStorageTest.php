@@ -291,21 +291,167 @@ class MediaStorageTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
+        $variantTree = $this->getMock('\Oryzone\MediaStorage\Variant\VariantTree');
 
+        $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
+        $context->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('defaultContext'));
+        $context->expects($this->any())
+            ->method('buildVariantTree')
+            ->will($this->returnValue($variantTree));
+
+        $media = $this->getMock('\Oryzone\MediaStorage\Model\MediaInterface');
+        $this->contextFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($context));
+
+        $provider = $this->getMock('\Oryzone\MediaStorage\Provider\ProviderInterface');
+        $provider->expects($this->any())
+            ->method('validateContent')
+            ->will($this->returnValue(TRUE));
+        $provider->expects($this->any())
+            ->method('hasChangedContent')
+            ->will($this->returnValue(TRUE));
+
+        $this->providerFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($provider));
+
+        $eventDispatcherExpectedCalls = array(
+            'onBeforeProcess',
+            'onAfterProcess',
+            'onBeforeUpdate',
+            'onAfterUpdate',
+            'onBeforeModelPersist',
+            'onAfterModelPersist'
+        );
+
+        foreach($eventDispatcherExpectedCalls as $method)
+        {
+            $this->eventDispatcherAdapter->expects($this->once())
+                ->method($method)
+                ->with($this->equalTo($media));
+        }
+
+        $this->persistenceAdapter->expects($this->once())
+            ->method('update')
+            ->with($media);
+
+        $this->ms->update($media);
     }
 
     public function testRemove()
     {
+        $variantTree = $this->getMock('\Oryzone\MediaStorage\Variant\VariantTree');
 
+        $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
+        $context->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('defaultContext'));
+        $context->expects($this->any())
+            ->method('buildVariantTree')
+            ->will($this->returnValue($variantTree));
+
+        $media = $this->getMock('\Oryzone\MediaStorage\Model\MediaInterface');
+        $media->expects($this->any())
+            ->method('getVariants')
+            ->will($this->returnValue(array()));
+
+        $this->contextFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($context));
+
+        $provider = $this->getMock('\Oryzone\MediaStorage\Provider\ProviderInterface');
+        $provider->expects($this->any())
+            ->method('validateContent')
+            ->will($this->returnValue(TRUE));
+        $provider->expects($this->any())
+            ->method('hasChangedContent')
+            ->will($this->returnValue(TRUE));
+
+        $this->providerFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($provider));
+
+        $eventDispatcherExpectedCalls = array(
+            'onBeforeRemove',
+            'onAfterRemove',
+            'onBeforeModelRemove',
+            'onAfterModelRemove'
+        );
+
+        foreach($eventDispatcherExpectedCalls as $method)
+        {
+            $this->eventDispatcherAdapter->expects($this->once())
+                ->method($method)
+                ->with($this->equalTo($media));
+        }
+
+        $this->persistenceAdapter->expects($this->once())
+            ->method('remove')
+            ->with($media);
+
+        $this->ms->remove($media);
     }
 
     public function testGetUrl()
     {
+        $variant = 'default';
+        $variantInstance = $this->getMock('\Oryzone\MediaStorage\Variant\VariantInterface');
+        $options = array('foo' => 'bar');
 
+        $media = $this->getMock('\Oryzone\MediaStorage\Model\MediaInterface');
+        $media->expects($this->any())
+            ->method('getVariantInstance')
+            ->will($this->returnValue($variantInstance));
+
+        $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
+        $this->contextFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($context));
+
+        $cdn = $this->getMock('\Oryzone\MediaStorage\Cdn\CdnInterface');
+        $this->cdnFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($cdn));
+        $cdn->expects($this->once())
+            ->method('getUrl')
+            ->with($this->equalTo($media), $this->anything(), $this->equalTo($options));
+
+        $this->ms->getUrl($media, $variant, $options);
     }
 
     public function testRender()
     {
+        $variant = 'default';
+        $variantInstance = $this->getMock('\Oryzone\MediaStorage\Variant\VariantInterface');
+        $urlOptions = array('subFoo' => 'subBar');
+        $options = array('foo' => 'bar', '_url' => $urlOptions);
 
+        $media = $this->getMock('\Oryzone\MediaStorage\Model\MediaInterface');
+        $media->expects($this->any())
+            ->method('getVariantInstance')
+            ->will($this->returnValue($variantInstance));
+
+        $context = $this->getMock('\Oryzone\MediaStorage\Context\ContextInterface');
+        $this->contextFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($context));
+
+        $provider = $this->getMock('\Oryzone\MediaStorage\Provider\ProviderInterface');
+        $this->providerFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($provider));
+
+        $cdn = $this->getMock('\Oryzone\MediaStorage\Cdn\CdnInterface');
+        $this->cdnFactory->expects($this->any())
+            ->method('get')
+            ->will($this->returnValue($cdn));
+        $cdn->expects($this->once())
+            ->method('getUrl')
+            ->with($this->equalTo($media), $this->anything(), $this->equalTo($urlOptions));
+
+        $this->ms->render($media, $variant, $options);
     }
 }

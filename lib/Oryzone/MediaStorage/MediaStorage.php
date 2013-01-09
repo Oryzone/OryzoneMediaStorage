@@ -456,6 +456,14 @@ class MediaStorage implements MediaStorageInterface
     {
         $context = $this->getContext($media->getContext());
         $cdn = $this->getCdn($context->getCdnName());
+
+        if ($variant === NULL) {
+            if($context->getDefaultVariant() !== NULL)
+                $variant = $context->getDefaultVariant();
+            else
+                $variant = $this->defaultVariant;
+        }
+
         $variant = $media->getVariantInstance($variant);
 
         return $cdn->getUrl($media, $variant, $options);
