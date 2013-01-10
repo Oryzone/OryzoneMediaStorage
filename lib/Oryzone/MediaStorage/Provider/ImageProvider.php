@@ -72,7 +72,6 @@ class ImageProvider extends FileProvider
     public function __construct($tempDir, \Imagine\Image\ImagineInterface $imagine = NULL)
     {
         parent::__construct();
-        $this->checkTempDir($tempDir);
         $this->tempDir = $tempDir;
         $this->imagine = $imagine;
     }
@@ -98,7 +97,7 @@ class ImageProvider extends FileProvider
                 throw new InvalidArgumentException(
                     sprintf('Cannot generate temp folder "%s" for the ImageProvider. A file with the same path already exists', $tempDir));
 
-            if (true !== @mkdir($tempDir, '0777', true)) {
+            if (true !== @mkdir($tempDir, 0777, true)) {
                 throw new InvalidArgumentException(
                     sprintf('Unable to create temp folder "%s" for the ImageProvider', $tempDir));
             }
@@ -174,6 +173,7 @@ class ImageProvider extends FileProvider
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
 
+            $this->checkTempDir($this->tempDir);
             $destFile = sprintf('%s%s-temp-%s.%s',
                 $this->tempDir, date('Y-m-d-h-i-s'), $source->getBasename('.'.$source->getExtension()), $options['format']);
 
