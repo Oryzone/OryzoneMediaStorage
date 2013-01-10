@@ -30,7 +30,7 @@ class PersistenceExceptionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->persistenceAdapter = $this->getMock('\Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface');
+        $this->persistenceAdapter = $this->getMock('\Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface');
         $this->exception = new PersistenceException('message', $this->persistenceAdapter);
     }
 

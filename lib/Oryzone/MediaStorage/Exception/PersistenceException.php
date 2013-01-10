@@ -11,12 +11,12 @@
 
 namespace Oryzone\MediaStorage\Exception;
 
-use Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface;
+use Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface;
 
 class PersistenceException extends MediaStorageException
 {
     /**
-     * @var \Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface $persistenceAdapter
+     * @var \Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface $persistenceAdapter
      */
     protected $persistenceAdapter;
 
@@ -24,7 +24,7 @@ class PersistenceException extends MediaStorageException
      * Constructor
      *
      * @param string                                                                $message
-     * @param \Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface $persistenceAdapter
+     * @param \Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface $persistenceAdapter
      * @param int                                                                   $code
      * @param \Exception                                                            $previous
      */
@@ -37,7 +37,7 @@ class PersistenceException extends MediaStorageException
     /**
      * Get persistence adapter
      *
-     * @return \Oryzone\MediaStorage\Persistence\Adapter\PersistenceAdapterInterface
+     * @return \Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface
      */
     public function getPersistenceAdapter()
     {
