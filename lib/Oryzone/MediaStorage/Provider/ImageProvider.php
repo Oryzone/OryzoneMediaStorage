@@ -153,8 +153,16 @@ class ImageProvider extends FileProvider
         if(is_string($content))
             $content = new \SplFileInfo($content);
 
+        /* 
+           Dirty trick to support objects who has a good <code>guessExtension()</code> method
+           like symfony classes <code>File</code> or <code>UploadedFile</code>
+        */
+        $extension = $content->getExtension();
+        if($extension == '' && method_exists($content, 'guessExtension'))
+            $extension = $content->guessExtension();
+
         return ($content instanceof \SplFileInfo && $content->isFile() &&
-            in_array(strtolower($content->getExtension()), self::$SUPPORTED_TYPES));
+            in_array(strtolower($extension), self::$SUPPORTED_TYPES));
     }
 
     /**
