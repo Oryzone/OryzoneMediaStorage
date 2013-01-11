@@ -58,4 +58,48 @@ interface MediaStorageInterface
      */
     public function render(MediaInterface $media, $variant = NULL, $options = array());
 
+    /**
+     * Get a Cdn with a given name
+     *
+     * @param string $name
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
+     * @return \Oryzone\MediaStorage\Cdn\CdnInterface
+     */
+    public function getCdn($name);
+
+    /**
+     * Get a Context with a given name
+     *
+     * @param string $name
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
+     * @return \Oryzone\MediaStorage\Context\ContextInterface
+     */
+    public function getContext($name);
+
+    /**
+     * Get a Filesystem with a given name
+     *
+     * @param string $name
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
+     * @return \Gaufrette\Filesystem
+     */
+    public function getFilesystem($name);
+
+    /**
+     * Get a Provider with a given name
+     *
+     * @param string $name
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
+     * @return \Oryzone\MediaStorage\Provider\ProviderInterface
+     */
+    public function getProvider($name);
+
+    /**
+     * Get a Naming Strategy with a given name
+     *
+     * @param string $name
+     * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
+     * @return \Oryzone\MediaStorage\NamingStrategy\NamingStrategyInterface
+     */
+    public function getNamingStrategy($name);
 }
