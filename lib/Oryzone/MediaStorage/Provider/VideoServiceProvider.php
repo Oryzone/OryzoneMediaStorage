@@ -11,9 +11,6 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-//use Symfony\Component\Form\FormBuilderInterface;
-//use Oryzone\Bundle\MediaStorageBundle\Form\DataTransformer\VideoServiceDataTransformer;
-
 use Imagine\Image\ImagineInterface;
 
 use Oryzone\MediaStorage\Exception\ProviderPrepareException,
@@ -128,16 +125,4 @@ abstract class VideoServiceProvider extends ImageProvider
         }
     }
 
-    /*
-     * {@inheritDoc}
-    public function buildMediaType(FormBuilderInterface $formBuilder, array $options = array())
-    {
-        $fieldOptions = array();
-        if(isset($options['edit']) && $options['edit'] == TRUE)
-            $fieldOptions = array('required' => FALSE);
-
-        $formBuilder->add('content', 'text', $fieldOptions)
-            ->addViewTransformer(new VideoServiceDataTransformer(static::CANONICAL_URL));
-    }
-    */
 }

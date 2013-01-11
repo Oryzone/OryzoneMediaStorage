@@ -12,7 +12,6 @@
 namespace Oryzone\MediaStorage\Provider;
 
 use Oryzone\MediaStorage\Model\MediaInterface,
-    Oryzone\MediaStorage\Context\ContextInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\ProviderProcessException,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;

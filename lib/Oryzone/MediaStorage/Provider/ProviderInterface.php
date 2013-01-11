@@ -15,8 +15,6 @@ use Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Context\ContextInterface;
 
-//use Symfony\Component\Form\FormBuilderInterface;
-
 interface ProviderInterface
 {
     /**
@@ -108,23 +106,6 @@ interface ProviderInterface
      * @return string
      */
     public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array());
-
-    /**
-     * Builds a form to handle the media
-     *
-     * @param  \Symfony\Component\Form\FormBuilderInterface $formBuilder
-     * @param  array                                        $options
-     * @return mixed
-     */
-    //public function buildMediaType(FormBuilderInterface $formBuilder, array $options = array());
-
-    /**
-     * Transforms a media (from a form)
-     *
-     * @param  \Oryzone\MediaStorage\Model\Media $media
-     * @return mixed
-     */
-    //public function transform(Media $media);
 
     /**
      * Removes any temp file stored by the current provider instance

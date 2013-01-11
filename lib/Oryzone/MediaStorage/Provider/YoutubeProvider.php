@@ -11,8 +11,6 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-//use Symfony\Component\Form\FormBuilderInterface;
-
 use Oryzone\MediaStorage\Provider\Provider,
     Oryzone\MediaStorage\Model\MediaInterface,
     Oryzone\MediaStorage\Context\ContextInterface,

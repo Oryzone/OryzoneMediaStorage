@@ -11,8 +11,6 @@
 
 namespace Oryzone\MediaStorage\Provider;
 
-//use Symfony\Component\Form\FormBuilderInterface;
-
 use Oryzone\MediaStorage\Model\MediaInterface;
 
 abstract class Provider implements ProviderInterface
@@ -97,35 +95,4 @@ abstract class Provider implements ProviderInterface
             if(file_exists($file))
                 unlink($file);
     }
-
-    /*
-     * {@inheritDoc}
-
-    public function buildMediaType(FormBuilderInterface $formBuilder, array $options = array())
-    {
-        $fieldTypes = array(
-            self::CONTENT_TYPE_FILE => 'file',
-            self::CONTENT_TYPE_INT => 'integer',
-            self::CONTENT_TYPE_STRING => 'text'
-        );
-
-        $fieldOptions = array();
-        if(isset($options['edit']) && $options['edit'] == TRUE)
-            $fieldOptions = array('required' => FALSE);
-
-        $formBuilder->add('content', $fieldTypes[self::$contentType], $fieldOptions);
-    }
-     */
-
-    /*
-     * Transforms a media (from a form)
-     *
-     * @param  \Oryzone\MediaStorage\Model\Media $media
-     * @return mixed
-
-    public function transform(Media $media)
-    {
-        // does nothing
-    }
-    */
 }
