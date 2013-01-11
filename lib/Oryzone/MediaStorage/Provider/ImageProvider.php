@@ -73,6 +73,7 @@ class ImageProvider extends FileProvider
     public function __construct($tempDir, \Imagine\Image\ImagineInterface $imagine = NULL)
     {
         parent::__construct();
+        $this->checkTempDir($tempDir);
         $this->tempDir = $tempDir;
         $this->imagine = $imagine;
     }
@@ -155,15 +156,6 @@ class ImageProvider extends FileProvider
 
         return ($content instanceof \SplFileInfo && $content->isFile() &&
             in_array(strtolower($content->getExtension()), self::$SUPPORTED_TYPES));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function prepare(MediaInterface $media, ContextInterface $context)
-    {
-        $this->checkTempDir($this->tempDir);
-        parent::prepare($media, $context);
     }
 
     /**
