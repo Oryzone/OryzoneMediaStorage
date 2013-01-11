@@ -12,6 +12,7 @@
 namespace Oryzone\MediaStorage\Provider;
 
 use Oryzone\MediaStorage\Model\MediaInterface,
+    Oryzone\MediaStorage\Context\ContextInterface,
     Oryzone\MediaStorage\Variant\VariantInterface,
     Oryzone\MediaStorage\Exception\ProviderProcessException,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
@@ -159,6 +160,15 @@ class ImageProvider extends FileProvider
     /**
      * {@inheritDoc}
      */
+    public function prepare(MediaInterface $media, ContextInterface $context)
+    {
+        $this->checkTempDir($this->tempDir);
+        parent::prepare($media, $context);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function process(MediaInterface $media, VariantInterface $variant, \SplFileInfo $source = NULL)
     {
         $options = $variant->getOptions();
@@ -173,7 +183,6 @@ class ImageProvider extends FileProvider
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
 
-            $this->checkTempDir($this->tempDir);
             $destFile = sprintf('%s%s-temp-%s.%s',
                 $this->tempDir, date('Y-m-d-h-i-s'), $source->getBasename('.'.$source->getExtension()), $options['format']);
 
