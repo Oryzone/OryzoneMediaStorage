@@ -61,7 +61,7 @@ interface MediaStorageInterface
     /**
      * Get a Cdn with a given name
      *
-     * @param string $name
+     * @param  string                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Cdn\CdnInterface
      */
@@ -70,7 +70,7 @@ interface MediaStorageInterface
     /**
      * Get a Context with a given name
      *
-     * @param string $name
+     * @param  string                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Context\ContextInterface
      */
@@ -79,7 +79,7 @@ interface MediaStorageInterface
     /**
      * Get a Filesystem with a given name
      *
-     * @param string $name
+     * @param  string                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Gaufrette\Filesystem
      */
@@ -88,7 +88,7 @@ interface MediaStorageInterface
     /**
      * Get a Provider with a given name
      *
-     * @param string $name
+     * @param  string                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Provider\ProviderInterface
      */
@@ -97,7 +97,7 @@ interface MediaStorageInterface
     /**
      * Get a Naming Strategy with a given name
      *
-     * @param string $name
+     * @param  string                                                       $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\NamingStrategy\NamingStrategyInterface
      */

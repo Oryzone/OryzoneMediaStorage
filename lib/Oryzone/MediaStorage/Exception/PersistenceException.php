@@ -23,10 +23,10 @@ class PersistenceException extends MediaStorageException
     /**
      * Constructor
      *
-     * @param string                                                                $message
+     * @param string                                                        $message
      * @param \Oryzone\MediaStorage\Persistence\PersistenceAdapterInterface $persistenceAdapter
-     * @param int                                                                   $code
-     * @param \Exception                                                            $previous
+     * @param int                                                           $code
+     * @param \Exception                                                    $previous
      */
     public function __construct($message = "", PersistenceAdapterInterface $persistenceAdapter = NULL, $code = 0, \Exception $previous = null)
     {
