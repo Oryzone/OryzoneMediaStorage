@@ -194,14 +194,14 @@ class ImageProvider extends FileProvider
              */
             $image = $this->imagine->open( $source );
 
-            $width = $options['width'];
-            $height = $options['height'];
-
             if(
                 $options['enlarge'] === TRUE ||
                 ($originalWidth >= $width && $originalHeight >= $height)
             )
             {
+                $width = $options['width'];
+                $height = $options['height'];
+
                 if ($options['resize'] == 'proportional') {
                     //calculate missing dimension
                     if($width === NULL)
