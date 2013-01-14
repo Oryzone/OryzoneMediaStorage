@@ -65,7 +65,7 @@ abstract class VideoService implements VideoServiceInterface
      * @param \Buzz\Browser                $buzz
      * @param \Doctrine\Common\Cache\Cache $cache
      */
-    public function __construct(Browser $buzz, Cache $cache = NULL)
+    public function __construct(Browser $buzz = NULL, Cache $cache = NULL)
     {
         $this->buzz = $buzz;
         $this->cache = $cache;
@@ -100,6 +100,8 @@ abstract class VideoService implements VideoServiceInterface
      *
      * @param  string $id
      * @param  array  $options
+     * @throws \Oryzone\MediaStorage\Exception\CannotDownloadFromUrlException
+     * @throws \Oryzone\MediaStorage\Exception\ResourceNotFoundException
      * @return string
      */
     abstract protected function getResponse($id, $options = array());

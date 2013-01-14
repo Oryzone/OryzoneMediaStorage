@@ -11,7 +11,8 @@
 
 namespace Oryzone\MediaStorage\Integration\Video;
 
-use Oryzone\MediaStorage\Exception\ResourceNotFoundException;
+use Oryzone\MediaStorage\Exception\ResourceNotFoundException,
+    Oryzone\MediaStorage\Exception\CannotDownloadFromUrlException;
 
 class VimeoVideoService extends VideoService
 {
@@ -123,6 +124,9 @@ class VimeoVideoService extends VideoService
     protected function getResponse($id, $options = array())
     {
         $requestUrl = sprintf(self::API_URL, $id);
+
+        if($this->buzz == NULL)
+            throw new CannotDownloadFromUrlException(sprintf('Cannot download from ulr "%s": Buzz client instance missing', $requestUrl), $requestUrl);
 
         /**
          * @var \Buzz\Message\Response $response

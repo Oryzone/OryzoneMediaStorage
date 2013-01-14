@@ -117,6 +117,9 @@ class YoutubeVideoService extends VideoService
     {
         $requestUrl = sprintf(self::API_URL, $id);
 
+        if($this->buzz == NULL)
+            throw new CannotDownloadFromUrlException(sprintf('Cannot download from ulr "%s": Buzz client instance missing', $requestUrl), $requestUrl);
+
         /**
          * @var \Buzz\Message\Response $response
          */
