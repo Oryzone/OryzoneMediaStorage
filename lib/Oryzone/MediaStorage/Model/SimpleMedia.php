@@ -4,7 +4,6 @@ namespace Oryzone\MediaStorage\Model;
 
 class SimpleMedia extends Media
 {
-
     /**
      * @var mixed $id
      */

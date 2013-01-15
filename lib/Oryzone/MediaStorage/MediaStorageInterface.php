@@ -61,45 +61,45 @@ interface MediaStorageInterface
     /**
      * Get a Cdn with a given name
      *
-     * @param  string                                                   $name
+     * @param  string|null                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Cdn\CdnInterface
      */
-    public function getCdn($name);
+    public function getCdn($name = NULL);
 
     /**
      * Get a Context with a given name
      *
-     * @param  string                                                   $name
+     * @param  string|null                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Context\ContextInterface
      */
-    public function getContext($name);
+    public function getContext($name = NULL);
 
     /**
      * Get a Filesystem with a given name
      *
-     * @param  string                                                   $name
+     * @param  string|null                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Gaufrette\Filesystem
      */
-    public function getFilesystem($name);
+    public function getFilesystem($name = NULL);
 
     /**
      * Get a Provider with a given name
      *
-     * @param  string                                                   $name
+     * @param  string|null                                                   $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\Provider\ProviderInterface
      */
-    public function getProvider($name);
+    public function getProvider($name = NULL);
 
     /**
      * Get a Naming Strategy with a given name
      *
-     * @param  string                                                       $name
+     * @param  string|null                                                       $name
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      * @return \Oryzone\MediaStorage\NamingStrategy\NamingStrategyInterface
      */
-    public function getNamingStrategy($name);
+    public function getNamingStrategy($name = NULL);
 }

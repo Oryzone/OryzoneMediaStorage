@@ -68,6 +68,11 @@ abstract class Media implements MediaInterface
     protected $modifiedAt;
 
     /**
+     * @var array $hints
+     */
+    protected $hints;
+
+    /**
      * Constructor
      */
     public function __construct($content = NULL, $contextName = NULL)
@@ -76,6 +81,7 @@ abstract class Media implements MediaInterface
         $this->context = $contextName;
         $this->createdAt = $this->modifiedAt = new \DateTime();
         $this->variants = array();
+        $this->hints = array();
     }
 
     /**
@@ -261,6 +267,46 @@ abstract class Media implements MediaInterface
             throw new InvalidArgumentException(sprintf('media "%s" has no variant named "%s" ', $this, $variantName));
 
         return Variant::fromArray($this->variants[$variantName]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addHint($key, $value)
+    {
+        $this->hints[$key] = $value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasHint($key)
+    {
+        return array_key_exists($key, $this->hints);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHint($key)
+    {
+        return isset($this->hints[$key]) ? $this->hints[$key] : NULL;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getHints()
+    {
+        return $this->hints;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function clearHints()
+    {
+        $this->hints = array();
     }
 
     /**

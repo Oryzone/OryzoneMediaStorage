@@ -12,11 +12,25 @@
 namespace Oryzone\MediaStorage\Model;
 
 use Oryzone\MediaStorage\Variant\VariantInterface,
-    Oryzone\MediaStorage\Context\ContextInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException;
 
 interface MediaInterface
 {
+    /**
+     * Constant to use as key to set the persistence adapter hint
+     */
+    const HINT_PERSISTENCE_ADAPTER = 'persistenceAdapter';
+
+    /**
+     * Constant to use as key to set the event dispatcher adapter hint
+     */
+    const HINT_EVENT_DISPATCHER_ADAPTER = 'eventDispatcherAdapter';
+
+    /**
+     * Constant to use as key to set the naming strategy hint
+     */
+    const HINT_NAMING_STRATEGY = 'namingStrategy';
+
     /**
      * Get the unique id of the media
      *
@@ -147,6 +161,47 @@ interface MediaInterface
      * @throws \Oryzone\MediaStorage\Exception\InvalidArgumentException
      */
     public function getVariantInstance($variantName);
+
+    /**
+     * Adds an hint
+     * Hints are used to temporally overwrite media storage configuration,
+     * allowing, for example, to use a different Naming Strategy instance when persisting a particular media
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    public function addHint($key, $value);
+
+    /**
+     * Checks if a given hint has been set
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function hasHint($key);
+
+    /**
+     * Gets the value of a previously set hint
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function getHint($key);
+
+    /**
+     * Gets the array of all the previously set hints
+     *
+     * @return array
+     */
+    public function getHints();
+
+    /**
+     * Removes all the previously set hints
+     *
+     * @return void
+     */
+    public function clearHints();
 
     /**
      * Returns a string that describes the media (mostly used for debug and on the descriptive message on exceptions)

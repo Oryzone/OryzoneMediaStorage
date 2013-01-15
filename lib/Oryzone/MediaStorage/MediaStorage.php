@@ -275,7 +275,7 @@ class MediaStorage implements MediaStorageInterface
     /**
      * Processes a given media
      *
-     * @param Model\Media $media
+     * @param \Oryzone\MediaStorage\Model\Media|\Oryzone\MediaStorage\Model\MediaInterface $media
      * @param bool        $isUpdate
      *
      * @throws Exception\VariantProcessingException
@@ -283,13 +283,15 @@ class MediaStorage implements MediaStorageInterface
      */
     protected function processMedia(MediaInterface $media, $isUpdate = FALSE)
     {
-        $this->eventDispatcherAdapter->onBeforeProcess($media);
-
         $context = $this->getContext($media->getContext());
         $provider = $this->getProvider($context->getProviderName(), $context->getProviderOptions());
         $variantsTree = $context->buildVariantTree();
         $filesystem = $this->getFilesystem($context->getFilesystemName());
-        $namingStrategy = $this->getNamingStrategy($context->getNamingStrategyName());
+
+        if($media->hasHint(MediaInterface::HINT_NAMING_STRATEGY))
+            $namingStrategy = $media->getHint(MediaInterface::HINT_NAMING_STRATEGY);
+        else
+            $namingStrategy = $this->getNamingStrategy($context->getNamingStrategyName());
 
         $generatedFiles = array();
 
@@ -352,8 +354,6 @@ class MediaStorage implements MediaStorageInterface
 
         $provider->removeTempFiles();
 
-        $this->eventDispatcherAdapter->onAfterProcess($media);
-
         return TRUE; // marks the media as updated
     }
 
@@ -387,24 +387,44 @@ class MediaStorage implements MediaStorageInterface
      */
     protected function storeMedia(MediaInterface $media)
     {
-        $this->eventDispatcherAdapter->onBeforeStore($media);
-        $this->processMedia($media);
-        $this->eventDispatcherAdapter->onAfterStore($media);
+        $eventDispatcherAdapter = $this->eventDispatcherAdapter;
+        if($media->hasHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER))
+            $eventDispatcherAdapter = $media->getHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER);
 
-        $this->eventDispatcherAdapter->onBeforeModelPersist($media);
-        $this->persistenceAdapter->save($media);
-        $this->eventDispatcherAdapter->onAfterModelPersist($media);
+        $persistenceAdapter = $this->persistenceAdapter;
+        if($media->hasHint(MediaInterface::HINT_PERSISTENCE_ADAPTER))
+            $persistenceAdapter = $media->getHint(MediaInterface::HINT_PERSISTENCE_ADAPTER);
+
+        $eventDispatcherAdapter->onBeforeStore($media);
+        $eventDispatcherAdapter->onBeforeProcess($media);
+        $this->processMedia($media);
+        $eventDispatcherAdapter->onAfterProcess($media);
+        $eventDispatcherAdapter->onAfterStore($media);
+
+        $eventDispatcherAdapter->onBeforeModelPersist($media);
+        $persistenceAdapter->save($media);
+        $eventDispatcherAdapter->onAfterModelPersist($media);
     }
 
     protected function updateMedia(MediaInterface $media)
     {
-        $this->eventDispatcherAdapter->onBeforeUpdate($media);
-        $this->processMedia($media, TRUE);
-        $this->eventDispatcherAdapter->onAfterUpdate($media);
+        $eventDispatcherAdapter = $this->eventDispatcherAdapter;
+        if($media->hasHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER))
+            $eventDispatcherAdapter = $media->getHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER);
 
-        $this->eventDispatcherAdapter->onBeforeModelPersist($media, TRUE);
-        $this->persistenceAdapter->update($media);
-        $this->eventDispatcherAdapter->onAfterModelPersist($media, TRUE);
+        $persistenceAdapter = $this->persistenceAdapter;
+        if($media->hasHint(MediaInterface::HINT_PERSISTENCE_ADAPTER))
+            $persistenceAdapter = $media->getHint(MediaInterface::HINT_PERSISTENCE_ADAPTER);
+
+        $eventDispatcherAdapter->onBeforeUpdate($media);
+        $eventDispatcherAdapter->onBeforeProcess($media);
+        $this->processMedia($media, TRUE);
+        $eventDispatcherAdapter->onAfterProcess($media);
+        $eventDispatcherAdapter->onAfterUpdate($media);
+
+        $eventDispatcherAdapter->onBeforeModelPersist($media, TRUE);
+        $persistenceAdapter->update($media);
+        $eventDispatcherAdapter->onAfterModelPersist($media, TRUE);
     }
 
     /**
@@ -431,7 +451,15 @@ class MediaStorage implements MediaStorageInterface
     public function remove(MediaInterface $media)
     {
         //TODO make removal of physical files asynchronous (optionally)
-        $this->eventDispatcherAdapter->onBeforeRemove($media);
+        $eventDispatcherAdapter = $this->eventDispatcherAdapter;
+        if($media->hasHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER))
+            $eventDispatcherAdapter = $media->getHint(MediaInterface::HINT_EVENT_DISPATCHER_ADAPTER);
+
+        $persistenceAdapter = $this->persistenceAdapter;
+        if($media->hasHint(MediaInterface::HINT_PERSISTENCE_ADAPTER))
+            $persistenceAdapter = $media->getHint(MediaInterface::HINT_PERSISTENCE_ADAPTER);
+
+        $eventDispatcherAdapter->onBeforeRemove($media);
 
         $context = $this->getContext($media->getContext());
         $filesystem = $this->getFilesystem($context->getFilesystemName());
@@ -442,11 +470,11 @@ class MediaStorage implements MediaStorageInterface
                 $filesystem->delete($variant->getFilename());
         }
 
-        $this->eventDispatcherAdapter->onAfterRemove($media);
+        $eventDispatcherAdapter->onAfterRemove($media);
 
-        $this->eventDispatcherAdapter->onBeforeModelRemove($media);
-        $this->persistenceAdapter->remove($media);
-        $this->eventDispatcherAdapter->onAfterModelRemove($media);
+        $eventDispatcherAdapter->onBeforeModelRemove($media);
+        $persistenceAdapter->remove($media);
+        $eventDispatcherAdapter->onAfterModelRemove($media);
     }
 
     /**
