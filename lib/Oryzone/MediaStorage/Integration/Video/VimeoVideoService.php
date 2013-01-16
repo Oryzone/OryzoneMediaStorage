@@ -126,7 +126,7 @@ class VimeoVideoService extends VideoService
         $requestUrl = sprintf(self::API_URL, $id);
 
         if($this->buzz == NULL)
-            throw new CannotDownloadFromUrlException(sprintf('Cannot download from ulr "%s": Buzz client instance missing', $requestUrl), $requestUrl);
+            throw new CannotDownloadFromUrlException(sprintf('Cannot download from url "%s": Buzz client instance missing', $requestUrl), $requestUrl);
 
         /**
          * @var \Buzz\Message\Response $response
@@ -134,7 +134,7 @@ class VimeoVideoService extends VideoService
         $response = $this->buzz->get($requestUrl);
 
         if($response->isClientError() || $response->isServerError())
-            throw new ResourceNotFoundException(sprintf('Cannot find youtube video with id "%s"', $id), $id);
+            throw new ResourceNotFoundException(sprintf('Cannot find vimeo video with id "%s"', $id), $id);
 
         return $response->getContent();
     }
