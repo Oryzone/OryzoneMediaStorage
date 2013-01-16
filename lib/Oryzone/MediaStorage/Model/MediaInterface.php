@@ -179,7 +179,7 @@ interface MediaInterface
      * @param string $key
      * @return boolean
      */
-    public function hasHint($key);
+    public function setHint($key);
 
     /**
      * Gets the value of a previously set hint

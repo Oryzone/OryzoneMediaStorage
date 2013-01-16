@@ -272,7 +272,7 @@ abstract class Media implements MediaInterface
     /**
      * {@inheritDoc}
      */
-    public function addHint($key, $value)
+    public function setHint($key, $value)
     {
         $this->hints[$key] = $value;
     }
