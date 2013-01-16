@@ -171,7 +171,7 @@ interface MediaInterface
      * @param mixed $value
      * @return void
      */
-    public function addHint($key, $value);
+    public function setHint($key, $value);
 
     /**
      * Checks if a given hint has been set
@@ -179,7 +179,7 @@ interface MediaInterface
      * @param string $key
      * @return boolean
      */
-    public function setHint($key);
+    public function hasHint($key);
 
     /**
      * Gets the value of a previously set hint
