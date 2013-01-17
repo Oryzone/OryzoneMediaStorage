@@ -70,7 +70,7 @@ abstract class Media implements MediaInterface
     /**
      * @var array $hints
      */
-    protected $hints;
+    protected $hints = array();
 
     /**
      * Constructor
