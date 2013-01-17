@@ -183,7 +183,7 @@ class MediaStorage implements MediaStorageInterface
         $dst = $filesystem->createStream($filename);
 
         $src->open(new StreamMode('rb+'));
-        $dst->open(new StreamMode('ab+'));
+        $dst->open(new StreamMode('wb+'));
 
         while (!$src->eof()) {
             $data    = $src->read(100000);
