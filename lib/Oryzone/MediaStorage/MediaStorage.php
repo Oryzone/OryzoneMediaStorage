@@ -177,19 +177,16 @@ class MediaStorage implements MediaStorageInterface
         $extension = $file->getExtension();
         $filename .= '.'.$extension;
 
+        // read file data as stream and writes it in a single block
         $src = new Local($file->getPathname());
-
-        //$dst = $filesystem->getAdapter()->createFileStream($filename, $filesystem);
-        $dst = $filesystem->createStream($filename);
-
         $src->open(new StreamMode('rb+'));
-        $dst->open(new StreamMode('wb+'));
-
+        $content = '';
         while (!$src->eof()) {
-            $data    = $src->read(100000);
-            $written = $dst->write($data);
+            $data     = $src->read(100000);
+            $content .= $data;
         }
-        $dst->close();
+        $dst = $filesystem->createFile($filename);
+        $dst->setContent($content);
         $src->close();
 
         $variant->setFilename($filename);
