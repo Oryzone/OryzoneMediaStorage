@@ -90,6 +90,8 @@ class YoutubeProvider extends VideoServiceProvider
      */
     public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
+        $availableModes = array('video', 'image', 'embedUrl');
+
         $defaultOptions = array(
             'mode' => 'video',
             'attributes' => array()
@@ -97,8 +99,12 @@ class YoutubeProvider extends VideoServiceProvider
 
         $options = array_merge($defaultOptions, $options);
 
-        if($options['mode'] != 'video' && $options['mode'] != 'image')
-            throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "image", "video"', $options['mode']) );
+        if(!in_array($options['mode'], $availableModes))
+            throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "%s"', $options['mode'], json_encode($availableModes)) );
+
+        $embedUrl = sprintf('http://www.youtube.com/embed/%s', $media->getMetaValue('id'));
+        if($options['mode'] == 'embedUrl')
+            return $embedUrl;
 
         switch ($options['mode']) {
             case 'video':
@@ -128,7 +134,7 @@ class YoutubeProvider extends VideoServiceProvider
                 $htmlAttributes .= $key . ($value !== '' ?('="' . $value. '"'):'') . ' ';
 
         if($options['mode'] == 'video')
-            $code = sprintf('<iframe src="http://www.youtube.com/embed/%s" %s></iframe>', $media->getMetaValue('id'), $htmlAttributes);
+            $code = sprintf('<iframe src="%s" %s></iframe>', $embedUrl, $htmlAttributes);
         else
             $code = sprintf('<img src="%s" %s/>', $url, $htmlAttributes);
 
