@@ -27,8 +27,11 @@ class CurlDownloader implements DownloaderInterface
         try {
             $fp = fopen($destination, 'w');
             $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_FAILONERROR, TRUE);
             curl_setopt($ch, CURLOPT_FILE, $fp);
             curl_exec($ch);
+            if(curl_error($ch))
+                throw new \Exception(curl_error($ch), curl_errno($ch));
             curl_close($ch);
             fclose($fp);
         } catch (\Exception $e) {
