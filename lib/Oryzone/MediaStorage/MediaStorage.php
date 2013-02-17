@@ -138,37 +138,6 @@ class MediaStorage implements MediaStorageInterface
     }
 
     /**
-     * @param \SplFileInfo             $file
-     * @param string                   $filename
-     * @param \Gaufrette\Filesystem    $filesystem
-     * @param Variant\VariantInterface $variant
-     *
-     * @return string
-     */
-    protected function saveFileToFilesystem(\SplFileInfo $file, $filename, \Gaufrette\Filesystem $filesystem, VariantInterface $variant)
-    {
-        $extension = $file->getExtension();
-        $filename .= '.'.$extension;
-
-        // read file data as stream and writes it in a single block
-        $src = new Local($file->getPathname());
-        $src->open(new StreamMode('rb+'));
-        $content = '';
-        while (!$src->eof()) {
-            $data     = $src->read(100000);
-            $content .= $data;
-        }
-        $dst = $filesystem->createFile($filename);
-        $dst->setContent($content);
-        $src->close();
-
-        $variant->setFilename($filename);
-        $variant->setStatus(VariantInterface::STATUS_READY);
-
-        return $filename;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function getCdn($name = NULL)
@@ -320,7 +289,24 @@ class MediaStorage implements MediaStorageInterface
                         if ($result) {
                             $generatedFiles[$variant->getName()] = $result;
                             $name = $namingStrategy->generateName($media, $variant, $filesystem);
-                            $this->saveFileToFilesystem($result, $name, $filesystem, $variant);
+
+                            $extension = $result->getExtension();
+                            $name .= '.'.$extension;
+
+                            // read file data as stream and writes it in a single block
+                            $src = new Local($result->getPathname());
+                            $src->open(new StreamMode('rb+'));
+                            $content = '';
+                            while (!$src->eof()) {
+                                $data     = $src->read(100000);
+                                $content .= $data;
+                            }
+                            $dst = $filesystem->createFile($name);
+                            $dst->setContent($content);
+                            $src->close();
+
+                            $variant->setFilename($name);
+                            $variant->setStatus(VariantInterface::STATUS_READY);
                         }
                         break;
 
