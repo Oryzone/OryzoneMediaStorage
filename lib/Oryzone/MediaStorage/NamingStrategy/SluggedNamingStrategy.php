@@ -25,10 +25,14 @@ class SluggedNamingStrategy extends NamingStrategy
      */
     public function generateName(MediaInterface $media, VariantInterface $variant, Filesystem $filesystem)
     {
-        if( trim($media->getName()) == '' )
+        $name = trim($media->getName());
+        if( $name == '' )
             throw new InvalidArgumentException('The given media has no name');
 
-        $name = self::urlize($media->getName());
+        if( mb_strlen($name) > 64)
+            $name = mb_substr($name, 0, 64);
+
+        $name = self::urlize($name);
         $uid = uniqid('-');
 
         return $name.$uid.'_'.$variant->getName();
