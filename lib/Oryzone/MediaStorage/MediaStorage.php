@@ -138,33 +138,6 @@ class MediaStorage implements MediaStorageInterface
     }
 
     /**
-     * Creates an instance of \SplFileInfo instance from a source.
-     * Source may be a string (of a path) an instance of SPL <code>File</code>
-     *
-     * @param  \Oryzone\MediaStorage\Model\MediaInterface     $media
-     * @param  \Oryzone\MediaStorage\Variant\VariantInterface $variant
-     * @throws Exception\IOException
-     * @return \SplFileInfo
-     */
-    protected static function createFileInstance(MediaInterface $media, VariantInterface $variant)
-    {
-        $source = $media->getContent();
-
-        if (is_string($source)) {
-            if(!is_file($source))
-                throw new IOException(
-                    sprintf('Cannot load file "%s" for media "%s", variant "%s". File not found.', $source, $media, $variant->getName()), $source);
-
-            return new \SplFileInfo($source);
-        } elseif(is_object($source) && $source instanceof \SplFileInfo)
-
-            return $source;
-
-        throw new IOException(
-            sprintf('Object of class "%s" is not an instance of \SplFileInfo so it cannot be loaded as a file while processing media "%s", variant "%s"', get_class($source), $media, $variant->getName()), $source);
-    }
-
-    /**
      * @param \SplFileInfo             $file
      * @param string                   $filename
      * @param \Gaufrette\Filesystem    $filesystem
@@ -321,8 +294,24 @@ class MediaStorage implements MediaStorageInterface
                                 $media, $variant);
                         }
 
-                    } else
-                        $file = MediaStorage::createFileInstance($media, $variant);
+                    } else {
+                        $source = $media->getContent();
+
+                        if (is_string($source)) {
+                            if(!is_file($source))
+                                throw new IOException(
+                                    sprintf('Cannot load file "%s" for media "%s", variant "%s". File not found.', $source, $media, $variant->getName()), $source);
+
+                            $file = new \SplFileInfo($source);
+
+                        } elseif(is_object($source) && $source instanceof \SplFileInfo) {
+                            $file = $source;
+
+                        } else {
+                            throw new IOException(
+                                sprintf('Object of class "%s" is not an instance of \SplFileInfo so it cannot be loaded as a file while processing media "%s", variant "%s"', get_class($source), $media, $variant->getName()), $source);
+                        }
+                    }
                 }
 
                 switch ($variant->getMode()) {
