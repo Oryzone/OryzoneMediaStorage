@@ -146,7 +146,7 @@ class MediaStorage implements MediaStorageInterface
      * @throws Exception\IOException
      * @return \SplFileInfo
      */
-    protected function createFileInstance(MediaInterface $media, VariantInterface $variant)
+    protected static function createFileInstance(MediaInterface $media, VariantInterface $variant)
     {
         $source = $media->getContent();
 
@@ -322,7 +322,7 @@ class MediaStorage implements MediaStorageInterface
                         }
 
                     } else
-                        $file = $this->createFileInstance($media, $variant);
+                        $file = MediaStorage::createFileInstance($media, $variant);
                 }
 
                 switch ($variant->getMode()) {
