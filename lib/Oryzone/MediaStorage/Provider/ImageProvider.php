@@ -177,14 +177,15 @@ class ImageProvider extends FileProvider
         $options = $variant->getOptions();
         $result = $source;
         list($originalWidth, $originalHeight) = getimagesize($source->getPathName());
-        $width = $originalWidth;
-        $height = $originalHeight;
 
         if (is_array($options) && !empty($options)) {
             if($this->imagine == NULL)
                 throw new ProviderProcessException(sprintf('Cannot process image "%s": Imagine library not installed or misconfigured', $media), $this, $media, $variant);
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
+
+            $width = $options['width'];
+            $height = $options['height'];
 
             $destFile = sprintf('%s%s-temp-%s.%s',
                 $this->tempDir, date('Y-m-d-h-i-s'), $source->getBasename('.'.$source->getExtension()), $options['format']);
