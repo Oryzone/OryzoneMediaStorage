@@ -186,12 +186,6 @@ class ImageProvider extends FileProvider
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
 
-            if($options['width'])
-                $width = $options['width'];
-
-            if($options['height'])
-                $height = $options['height'];
-
             $destFile = sprintf('%s%s-temp-%s.%s',
                 $this->tempDir, date('Y-m-d-h-i-s'), $source->getBasename('.'.$source->getExtension()), $options['format']);
 
@@ -202,7 +196,7 @@ class ImageProvider extends FileProvider
 
             if(
                 $options['enlarge'] === TRUE ||
-                ($originalWidth >= $width && $originalHeight >= $height)
+                ($originalWidth >= $options['width'] && $originalHeight >= $options['height'])
             )
             {
                 $width = $options['width'];
