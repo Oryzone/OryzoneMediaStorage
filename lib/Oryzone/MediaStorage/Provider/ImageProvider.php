@@ -177,6 +177,8 @@ class ImageProvider extends FileProvider
         $options = $variant->getOptions();
         $result = $source;
         list($originalWidth, $originalHeight) = getimagesize($source->getPathName());
+        $width = $originalWidth;
+        $height = $originalHeight;
 
         if (is_array($options) && !empty($options)) {
             if($this->imagine == NULL)
@@ -184,8 +186,11 @@ class ImageProvider extends FileProvider
 
             $options = $this->processOptions($options, $variant->getName(), $media->getContext());
 
-            $width = $options['width'];
-            $height = $options['height'];
+            if($options['width'])
+                $width = $options['width'];
+
+            if($options['height'])
+                $height = $options['height'];
 
             $destFile = sprintf('%s%s-temp-%s.%s',
                 $this->tempDir, date('Y-m-d-h-i-s'), $source->getBasename('.'.$source->getExtension()), $options['format']);
