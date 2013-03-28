@@ -75,7 +75,8 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
             ->method('getMetaValue')
             ->will($this->returnValueMap(array(
             array('width', null, 50),
-            array('height', null, 30)
+            array('height', null, 30),
+            array('id', null, '62509176')
         )));
 
         $image = $this->getMock('\Imagine\Image\ImageInterface');
@@ -144,5 +145,15 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $expectedHtml = '<img src="http://example.com/preview.jpg" title="sample" class="vimeoVideo" />';
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expectedHtml, $rendered);
+
+        $options['mode'] = 'embedUrl';
+        $expected = sprintf(VimeoProvider::EMBED_URL, '62509176');
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expected, $rendered);
+
+        $options['mode'] = 'url';
+        $expected = sprintf(VimeoProvider::CANONICAL_URL, '62509176');
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expected, $rendered);
     }
 }

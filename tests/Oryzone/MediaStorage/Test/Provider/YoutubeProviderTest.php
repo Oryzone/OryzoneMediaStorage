@@ -75,7 +75,8 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
             ->method('getMetaValue')
             ->will($this->returnValueMap(array(
             array('width', null, 50),
-            array('height', null, 30)
+            array('height', null, 30),
+            array('id', null, '8yvGCAvOAfM')
         )));
 
         $image = $this->getMock('\Imagine\Image\ImageInterface');
@@ -145,5 +146,15 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
         $expectedHtml = '<img src="http://www.example.com/sample.jpg" title="sample" class="videoPlayer" />';
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expectedHtml, $rendered);
+
+        $options['mode'] = 'embedUrl';
+        $expected = sprintf(YoutubeProvider::EMBED_URL, '8yvGCAvOAfM');
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expected, $rendered);
+
+        $options['mode'] = 'url';
+        $expected = sprintf(YoutubeProvider::CANONICAL_URL, '8yvGCAvOAfM');
+        $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
+        $this->assertEquals($expected, $rendered);
     }
 }

@@ -24,6 +24,11 @@ class VimeoProvider extends VideoServiceProvider
     const CANONICAL_URL = 'http://vimeo.com/%s';
 
     /**
+     * Embed url scheme
+     */
+    const EMBED_URL = 'http://player.vimeo.com/video/%s';
+
+    /**
      * {@inheritDoc}
      */
     const VALIDATION_REGEX_URL = '%^https?://(?:www\.)?vimeo\.com/(?:m/)?(\d+)(?:.*)?$%i';
@@ -88,7 +93,7 @@ class VimeoProvider extends VideoServiceProvider
      */
     public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
-        $availableModes = array('video', 'image', 'embedUrl');
+        $availableModes = array('video', 'image', 'embedUrl', 'url');
 
         $defaultOptions = array(
             'mode' => 'video',
@@ -100,9 +105,12 @@ class VimeoProvider extends VideoServiceProvider
         if(!in_array($options['mode'], $availableModes))
             throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "%s"', $options['mode'], json_encode($availableModes)) );
 
-        $embedUrl = sprintf('http://player.vimeo.com/video/%s', $media->getMetaValue('id'));
+        $embedUrl = sprintf(self::EMBED_URL, $media->getMetaValue('id'));
         if($options['mode'] == 'embedUrl')
             return $embedUrl;
+
+        if($options['mode'] == 'url')
+            return sprintf(self::CANONICAL_URL, $media->getMetaValue('id'));
 
         switch ($options['mode']) {
             case 'video':

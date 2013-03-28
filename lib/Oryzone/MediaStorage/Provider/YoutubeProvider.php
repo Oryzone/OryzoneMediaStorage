@@ -25,6 +25,11 @@ class YoutubeProvider extends VideoServiceProvider
     const CANONICAL_URL = 'http://www.youtube.com/watch?v=%s';
 
     /**
+     * Embed url scheme
+     */
+    const EMBED_URL = 'http://www.youtube.com/embed/%s';
+
+    /**
      * {@inheritDoc}
      */
     const VALIDATION_REGEX_URL = '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i';
@@ -90,7 +95,7 @@ class YoutubeProvider extends VideoServiceProvider
      */
     public function render(MediaInterface $media, VariantInterface $variant, $url = NULL, $options = array())
     {
-        $availableModes = array('video', 'image', 'embedUrl');
+        $availableModes = array('video', 'image', 'embedUrl', 'url');
 
         $defaultOptions = array(
             'mode' => 'video',
@@ -102,9 +107,12 @@ class YoutubeProvider extends VideoServiceProvider
         if(!in_array($options['mode'], $availableModes))
             throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "%s"', $options['mode'], json_encode($availableModes)) );
 
-        $embedUrl = sprintf('http://www.youtube.com/embed/%s', $media->getMetaValue('id'));
+        $embedUrl = sprintf(self::EMBED_URL, $media->getMetaValue('id'));
         if($options['mode'] == 'embedUrl')
             return $embedUrl;
+
+        if($options['mode'] == 'url')
+            return sprintf(self::CANONICAL_URL, $media->getMetaValue('id'));
 
         switch ($options['mode']) {
             case 'video':
