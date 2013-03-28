@@ -142,7 +142,7 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
     {
         $url = 'http://www.example.com/sample.jpg';
         $options = array('attributes' => array('class' => 'videoPlayer'));
-        $expectedHtml = '<iframe src="http://www.youtube.com/embed/" frameborder="0" allowfullscreen class="videoPlayer" ></iframe>';
+        $expectedHtml = '<iframe src="http://www.youtube.com/embed/CpfdBtk3oWY" frameborder="0" allowfullscreen class="videoPlayer" ></iframe>';
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expectedHtml, $rendered);
 

@@ -141,7 +141,7 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $options = array(
             'attributes' => array('class' => 'vimeoVideo')
         );
-        $expectedHtml = '<iframe src="http://player.vimeo.com/video/" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen class="vimeoVideo" ></iframe>';
+        $expectedHtml = '<iframe src="http://player.vimeo.com/video/56974716" frameborder="0" allowfullscreen webkitAllowFullScreen mozallowfullscreen class="vimeoVideo" ></iframe>';
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expectedHtml, $rendered);
 
