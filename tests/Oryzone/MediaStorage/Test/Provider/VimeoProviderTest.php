@@ -59,6 +59,11 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $this->media->expects($this->any())
             ->method('getContent')
             ->will($this->returnValue('http://vimeo.com/56974716'));
+        $this->media->expects($this->any())
+            ->method('getMetaValue')
+            ->will($this->returnValueMap(array(
+                array('id', null, '56974716')
+            )));
 
         $this->variant = $this->getMock('\Oryzone\MediaStorage\Variant\VariantInterface');
         $this->variant->expects($this->any())
@@ -75,8 +80,7 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
             ->method('getMetaValue')
             ->will($this->returnValueMap(array(
             array('width', null, 50),
-            array('height', null, 30),
-            array('id', null, '62509176')
+            array('height', null, 30)
         )));
 
         $image = $this->getMock('\Imagine\Image\ImageInterface');
@@ -147,12 +151,12 @@ class VimeoProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedHtml, $rendered);
 
         $options['mode'] = 'embedUrl';
-        $expected = sprintf(VimeoProvider::EMBED_URL, '62509176');
+        $expected = sprintf(VimeoProvider::EMBED_URL, '56974716');
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expected, $rendered);
 
         $options['mode'] = 'url';
-        $expected = sprintf(VimeoProvider::CANONICAL_URL, '62509176');
+        $expected = sprintf(VimeoProvider::CANONICAL_URL, '56974716');
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expected, $rendered);
     }

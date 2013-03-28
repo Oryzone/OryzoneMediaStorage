@@ -105,12 +105,13 @@ class VimeoProvider extends VideoServiceProvider
         if(!in_array($options['mode'], $availableModes))
             throw new InvalidArgumentException(sprintf('Invalid mode "%s" to render a Youtube Video. Allowed values: "%s"', $options['mode'], json_encode($availableModes)) );
 
-        $embedUrl = sprintf(self::EMBED_URL, $media->getMetaValue('id'));
+        $id = $media->getMetaValue('id');
+        $embedUrl = sprintf(self::EMBED_URL, $id);
         if($options['mode'] == 'embedUrl')
             return $embedUrl;
 
         if($options['mode'] == 'url')
-            return sprintf(self::CANONICAL_URL, $media->getMetaValue('id'));
+            return sprintf(self::CANONICAL_URL, $id);
 
         switch ($options['mode']) {
             case 'video':

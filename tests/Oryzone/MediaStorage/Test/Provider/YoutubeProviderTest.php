@@ -59,6 +59,11 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
         $this->media->expects($this->any())
                     ->method('getContent')
                     ->will($this->returnValue('http://www.youtube.com/watch?v=CpfdBtk3oWY'));
+        $this->media->expects($this->any())
+                    ->method('getMetaValue')
+                    ->will($this->returnValueMap(array(
+                        array('id', null, 'CpfdBtk3oWY')
+                    )));
 
         $this->variant = $this->getMock('\Oryzone\MediaStorage\Variant\VariantInterface');
         $this->variant->expects($this->any())
@@ -75,8 +80,7 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
             ->method('getMetaValue')
             ->will($this->returnValueMap(array(
             array('width', null, 50),
-            array('height', null, 30),
-            array('id', null, '8yvGCAvOAfM')
+            array('height', null, 30)
         )));
 
         $image = $this->getMock('\Imagine\Image\ImageInterface');
@@ -148,12 +152,12 @@ class YoutubeProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedHtml, $rendered);
 
         $options['mode'] = 'embedUrl';
-        $expected = sprintf(YoutubeProvider::EMBED_URL, '8yvGCAvOAfM');
+        $expected = sprintf(YoutubeProvider::EMBED_URL, 'CpfdBtk3oWY');
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expected, $rendered);
 
         $options['mode'] = 'url';
-        $expected = sprintf(YoutubeProvider::CANONICAL_URL, '8yvGCAvOAfM');
+        $expected = sprintf(YoutubeProvider::CANONICAL_URL, 'CpfdBtk3oWY');
         $rendered = $this->provider->render($this->media, $this->variant, $url, $options);
         $this->assertEquals($expected, $rendered);
     }
