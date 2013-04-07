@@ -49,7 +49,7 @@ class LocalCdn implements CdnInterface
             if(isset($options['protocol']))
                 $protocol = $options['protocol'];
             else
-                $protocol = isset($_SERVER['HTTPS']) ? 'https' : 'http';
+                $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
 
             $url = sprintf('%s://%s/%s', $protocol, $domain, ltrim($url, '/'));
         }
