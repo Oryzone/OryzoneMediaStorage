@@ -28,7 +28,8 @@ use Oryzone\MediaStorage\Event\EventDispatcherAdapterInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException,
     Oryzone\MediaStorage\Exception\InvalidContentException,
     Oryzone\MediaStorage\Exception\IOException,
-    Oryzone\MediaStorage\Exception\VariantProcessingException;
+    Oryzone\MediaStorage\Exception\VariantProcessingException,
+    Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaStorage implements MediaStorageInterface
 {
