@@ -28,7 +28,8 @@ use Oryzone\MediaStorage\Event\EventDispatcherAdapterInterface,
     Oryzone\MediaStorage\Exception\InvalidArgumentException,
     Oryzone\MediaStorage\Exception\InvalidContentException,
     Oryzone\MediaStorage\Exception\IOException,
-    Oryzone\MediaStorage\Exception\VariantProcessingException;
+    Oryzone\MediaStorage\Exception\VariantProcessingException,
+    Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaStorage implements MediaStorageInterface
 {
@@ -290,7 +291,12 @@ class MediaStorage implements MediaStorageInterface
                             $generatedFiles[$variant->getName()] = $result;
                             $name = $namingStrategy->generateName($media, $variant, $filesystem);
 
-                            $extension = $result->getExtension();
+                            if ($result instanceof UploadedFile) {
+                                $extension = $result->guessExtension();
+                            } else {
+                                $extension = $result->getExtension();
+                            }
+
                             $name .= '.'.$extension;
 
                             // read file data as stream and writes it in a single block
