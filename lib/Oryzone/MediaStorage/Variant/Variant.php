@@ -278,7 +278,7 @@ class Variant implements VariantInterface
         if( isset($array['options']) )
             $variant->setOptions($array['options']);
         if( isset($array['mode']) )
-            $variant->setStatus($array['mode']);
+            $variant->setMode($array['mode']);
         if( isset($array['status']) )
             $variant->setStatus($array['status']);
         if( isset($array['error']) )
