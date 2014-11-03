@@ -26,7 +26,7 @@ class VimeoProvider extends VideoServiceProvider
     /**
      * Embed url scheme
      */
-    const EMBED_URL = 'http://player.vimeo.com/video/%s';
+    const EMBED_URL = '//player.vimeo.com/video/%s';
 
     /**
      * {@inheritDoc}

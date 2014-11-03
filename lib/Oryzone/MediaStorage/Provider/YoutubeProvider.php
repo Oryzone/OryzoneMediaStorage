@@ -22,12 +22,12 @@ class YoutubeProvider extends VideoServiceProvider
     /**
      * Canonical url scheme
      */
-    const CANONICAL_URL = '//www.youtube.com/watch?v=%s';
+    const CANONICAL_URL = 'http://www.youtube.com/watch?v=%s';
 
     /**
      * Embed url scheme
      */
-    const EMBED_URL = 'http://www.youtube.com/embed/%s';
+    const EMBED_URL = '//www.youtube.com/embed/%s';
 
     /**
      * {@inheritDoc}
