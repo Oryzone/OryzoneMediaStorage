@@ -21,7 +21,7 @@ class VimeoProvider extends VideoServiceProvider
     /**
      * Canonical url scheme
      */
-    const CANONICAL_URL = 'http://vimeo.com/%s';
+    const CANONICAL_URL = '//vimeo.com/%s';
 
     /**
      * Embed url scheme
